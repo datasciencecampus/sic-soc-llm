@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>sic-soc-llm - 4. Custom (COICOP) classifier</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">sic-soc-llm</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html" rel="" target="">
+ <span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../method.html" rel="" target="">
+ <span class="menu-text">Method</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../tutorials/index.html" rel="" target="">
+ <span class="menu-text">Tutorials</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../reference/index.html" rel="" target="">
+ <span class="menu-text">Reference</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/datasciencecampus/sic-soc-llm" rel="" target=""><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">4. Custom (COICOP) classifier</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Demonstration notebook for the <code>ClassificationLLM</code> using RAG with a custom index. In this demo, the Classification of Individual Consumption According to Purpose (COICOP) index is used.</p>
+<div class="cell" data-execution_count="1">
+<details open="">
+<summary>Code: Import methods and initialise</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sic_soc_llm <span class="im">import</span> setup_logging, get_config</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sic_soc_llm.llm <span class="im">import</span> ClassificationLLM</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sic_soc_llm.embedding <span class="im">import</span> EmbeddingHandler</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>logger <span class="op">=</span> setup_logging(<span class="st">'coicop_notebook'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>config <span class="op">=</span> get_config()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="load-coicop-or-other-custom-index" class="level2">
+<h2 class="anchored" data-anchor-id="load-coicop-or-other-custom-index">Load COICOP or other custom index</h2>
+<p>The expected format of the custom index is a text file with each line containing one index entry in the format <code>class_code : class_descriptive</code>. The following code snippet demonstrates how to load and embed the COICOP index. This embedding is saved in a vector store that is used in the retrieval step of RAG based classification in <code>ClassificationLLM</code>. Note that the <code>coicop_demo_llm</code> should be replaced with the LLM of your choice.</p>
+<div class="cell" data-execution_count="3">
+<details open="">
+<summary>Code: Load COICOP index</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>index_filepath <span class="op">=</span> config[<span class="st">"lookups"</span>][<span class="st">"coicop_condensed"</span>]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(index_filepath) <span class="im">as</span> file_object:</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> _ <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">5</span>):</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="bu">next</span>(file_object))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>embed <span class="op">=</span> EmbeddingHandler(db_dir<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(index_filepath) <span class="im">as</span> file_object:</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    embed.embed_index(file_object<span class="op">=</span>file_object)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>coicop_llm <span class="op">=</span> ClassificationLLM(embedding_handler<span class="op">=</span>embed, llm <span class="op">=</span> coicop_demo_llm)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>CP01111: Rice
+
+CP01112: Flours and other cereals
+
+CP01113: Bread
+
+CP01114: Other bakery products
+
+CP01115: Pizza and quiche
+</code></pre>
+</div>
+</div>
+</section>
+<section id="example-classification-using-coicop-index" class="level2">
+<h2 class="anchored" data-anchor-id="example-classification-using-coicop-index">Example classification using COICOP index</h2>
+<p>The following code block demonstrates how to classify a few examples using the COICOP index. Note that the respondent data is passed as a dictionary. For different use cases, any custom survey fields can be used as keys in the dictionary. <code>ClassificationLLM</code> uses the values that are present in the dictionary to retrieve the relevant information from the index and includes all the provided fields in the generative query step.</p>
+<div class="cell" data-execution_count="4">
+<details open="">
+<summary>Code: Example lookup</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> item <span class="kw">in</span> [<span class="st">"organic whole milk"</span>, <span class="st">"skinny jeans"</span>, <span class="st">"tooth filling"</span>]:</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Get response from LLM</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    response, short_list <span class="op">=</span> coicop_llm.rag_general_code(respondent_data<span class="op">=</span>{<span class="st">"item"</span>: item})</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Print the output</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Input:"</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" item:  </span><span class="sc">{</span>item<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Response:"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> x,y  <span class="kw">in</span> response.__dict__.items():</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span> (<span class="ss">f' </span><span class="sc">{</span>x<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>y<span class="sc">}</span><span class="ss">'</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" shortlist used in RAG: </span><span class="sc">{</span>short_list<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">""</span>)</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'==========================================='</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Input:
+ item:  organic whole milk
+
+Response:
+ codable: True
+ followup: None
+ class_code: CP01141
+ class_descriptive: Whole milk
+ alt_candidates: [RagCandidate(class_code='CP01146', class_descriptive='Other milk products', likelihood=0.1), RagCandidate(class_code='CP01199', class_descriptive='Other food products n.e.c.', likelihood=0.05)]
+ reasoning: The respondent's data mentions 'organic whole milk' which directly matches with the 'Whole milk' category in the classification index. Although the milk is organic, there is no separate category for organic milk in the provided subset of classification index. Therefore, the most suitable classification code is 'CP01141' for 'Whole milk'. Other possible but less likely categories could be 'Other milk products' or 'Other food products n.e.c.'.
+ shortlist used in RAG: [{'distance': 0.34670406579971313, 'title': ' Whole milk\n', 'code': 'CP01141', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.503943145275116, 'title': ' Other milk products\n', 'code': 'CP01146', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.7324802875518799, 'title': ' Preserved milk\n', 'code': 'CP01143', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.7517217397689819, 'title': ' Low fat milk\n', 'code': 'CP01142', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.0075042247772217, 'title': ' Yoghurt\n', 'code': 'CP01144', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.0319886207580566, 'title': ' Other food products n.e.c.\n', 'code': 'CP01199', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1342483758926392, 'title': ' Artificial sugar substitutes\n', 'code': 'CP01186', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1362781524658203, 'title': ' Other cereal products\n', 'code': 'CP01118', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1640748977661133, 'title': ' Other bakery products\n', 'code': 'CP01114', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1741816997528076, 'title': ' Cheese and curd\n', 'code': 'CP01145', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.174346685409546, 'title': ' Confectionery products\n', 'code': 'CP01184', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1958931684494019, 'title': ' Olive oil\n', 'code': 'CP01153', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.205189824104309, 'title': ' Pharmaceutical products\n', 'code': 'CP06110', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.2462573051452637, 'title': ' Sugar\n', 'code': 'CP01181', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2476091384887695, 'title': ' Other edible oils\n', 'code': 'CP01154', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2480995655059814, 'title': ' Soft drinks\n', 'code': 'CP01222', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.260750651359558, 'title': ' Rice\n', 'code': 'CP01111', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2730278968811035, 'title': ' Other edible animal fats\n', 'code': 'CP01155', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2755171060562134, 'title': ' Breakfast cereals\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2833455801010132, 'title': ' Dried fruit and nuts\n', 'code': 'CP01163', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}]
+
+===========================================
+
+Input:
+ item:  skinny jeans
+
+Response:
+ codable: False
+ followup: Is the item intended for men or women?
+ class_code: None
+ class_descriptive: None
+ alt_candidates: [RagCandidate(class_code='CP03121', class_descriptive='Garments for men', likelihood=0.5), RagCandidate(class_code='CP03122', class_descriptive='Garments for women', likelihood=0.5)]
+ reasoning: The item 'skinny jeans' can be classified as either 'Garments for men' or 'Garments for women'. Without information on the intended gender for the item, a definitive classification cannot be made.
+ shortlist used in RAG: [{'distance': 1.0392100811004639, 'title': ' Garments for men\n', 'code': 'CP03121', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.0935454368591309, 'title': ' Garments for women\n', 'code': 'CP03122', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.1048061847686768, 'title': ' Clothing materials\n', 'code': 'CP03110', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.1491382122039795, 'title': ' Clothing accessories\n', 'code': 'CP03132', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.1838074922561646, 'title': ' Clothes washing machines\n', 'code': 'CP05312', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.2130916118621826, 'title': ' Other articles of clothing\n', 'code': 'CP03131', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.276893973350525, 'title': ' Jams\n', 'code': 'CP01182', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.289067029953003, 'title': ' Repair and hire of clothing\n', 'code': 'CP03142', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.2973718643188477, 'title': ' Dried\n', 'code': 'CP01135', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2973718643188477, 'title': ' Dried\n', 'code': 'CP01127', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3091435432434082, 'title': ' Crisps\n', 'code': 'CP01175', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3274517059326172, 'title': ' Bed linen\n', 'code': 'CP05202', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3461003303527832, 'title': ' Bicycles\n', 'code': 'CP07130', 'four_digit_code': 'CP07', 'two_digit_code': 'CP'}, {'distance': 1.348400354385376, 'title': ' Pork\n', 'code': 'CP01122', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.374528408050537, 'title': ' Footwear for men\n', 'code': 'CP03211', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.375754714012146, 'title': ' Irons\n', 'code': 'CP05323', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3820576667785645, 'title': ' Breakfast cereals\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3839714527130127, 'title': ' Cleaning of clothing\n', 'code': 'CP03141', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.3974006175994873, 'title': ' Heaters\n', 'code': 'CP05314', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3990004062652588, 'title': ' Camper vans\n', 'code': 'CP09211', 'four_digit_code': 'CP09', 'two_digit_code': 'CP'}]
+
+===========================================
+
+Input:
+ item:  tooth filling
+
+Response:
+ codable: True
+ followup: None
+ class_code: CP06220
+ class_descriptive: Dental services
+ alt_candidates: []
+ reasoning: The respondent's data mentions 'tooth filling' which is a service provided by dentists. Therefore, the classification code 'CP06220' for 'Dental services' is the most appropriate.
+ shortlist used in RAG: [{'distance': 0.9580117464065552, 'title': ' Dental services\n', 'code': 'CP06220', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.2639143466949463, 'title': ' Chocolate\n', 'code': 'CP01183', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2665995359420776, 'title': ' Sugar\n', 'code': 'CP01181', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2992042303085327, 'title': ' Tyres\n', 'code': 'CP07211', 'four_digit_code': 'CP07', 'two_digit_code': 'CP'}, {'distance': 1.350462794303894, 'title': ' Bread\n', 'code': 'CP01113', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.381696105003357, 'title': ' Crisps\n', 'code': 'CP01175', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4047654867172241, 'title': ' Cutlery\n', 'code': 'CP05402', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.4135582447052002, 'title': ' Cigarettes\n', 'code': 'CP02201', 'four_digit_code': 'CP02', 'two_digit_code': 'CP'}, {'distance': 1.4301745891571045, 'title': ' Salt\n', 'code': 'CP01192', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.443652868270874, 'title': ' Hearing aids\n', 'code': 'CP06132', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.4493238925933838, 'title': ' Jewellery\n', 'code': 'CP12311', 'four_digit_code': 'CP12', 'two_digit_code': 'CP'}, {'distance': 1.4624769687652588, 'title': ' Breakfast cereals\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4685726165771484, 'title': ' Butter\n', 'code': 'CP01151', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.474284291267395, 'title': ' Baby food\n', 'code': 'CP01193', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4815493822097778, 'title': ' Coffee\n', 'code': 'CP01211', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.481993317604065, 'title': ' Eggs\n', 'code': 'CP01147', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4954715967178345, 'title': ' Whole milk\n', 'code': 'CP01141', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.5035918951034546, 'title': ' Edible offal\n', 'code': 'CP01126', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.509711503982544, 'title': ' Other cereal products\n', 'code': 'CP01118', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.510235071182251, 'title': ' Cheese and curd\n', 'code': 'CP01145', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}]
+
+===========================================
+</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'alternate';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">All content is available under the <a href="http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence V3.0</a>, except where otherwise stated.</div>   
+    <div class="nav-footer-center">Built using <a href="https://quarto.org/">Quarto</a>.</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+</body></html>

@@ -1,0 +1,11 @@
+[
+  {
+    "listing": "/tutorials/index.html",
+    "items": [
+      "/tutorials/1_sic_data_structure.html",
+      "/tutorials/2_sic_classifier.html",
+      "/tutorials/3_soc_classifier.html",
+      "/tutorials/4_custom_coicop_classifier.html"
+    ]
+  }
+]
