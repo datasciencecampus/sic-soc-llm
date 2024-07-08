@@ -1,0 +1,103 @@
+---
+title: "1. SIC data structure"
+format:
+  html:
+    code-fold: show
+---
+
+Demonstration notebook for the SIC data structure.
+
+```{python}
+#| code-summary: "Code: Import methods and initialise"
+#| output: false
+import random
+
+from sic_soc_llm import setup_logging, get_config
+from sic_soc_llm.data_models import sic_hierarchy, sic_data_access
+
+logger = setup_logging("sic_data_notebook")
+config = get_config()
+seed = 3847693223
+```
+
+There are two additional datasets required for the SIC hierarchy object that are not part of the repository. These are the SIC structure and SIC index datasets. The following code will download these datasets from the ONS website if they are not already available.
+
+```{python}
+#| output: false
+#| code-summary: "Code: Make sure all required SIC datasets are available"
+import requests
+from pathlib import Path
+
+sic_urls = [
+    "https://www.ons.gov.uk/file?uri=/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007/publisheduksicsummaryofstructureworksheet.xlsx",
+    "https://www.ons.gov.uk/file?uri=/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007/uksic2007indexeswithaddendumdecember2022.xlsx"
+]
+
+file_paths = [
+    Path(config['lookups']['sic_structure']),
+    Path(config["lookups"]["sic_index"])
+]
+
+for url, file_path in zip(sic_urls, file_paths):
+    if not file_path.exists():
+        r = requests.get(url)
+        file_path.parent.mkdir(exist_ok=True, parents=True)
+        with open(file_path, 'wb') as outfile:
+            outfile.write(r.content)
+```
+
+## Load SIC index
+
+```{python}
+#| code-summary: "Code: Load SIC index"
+sic_index_filepath = config["lookups"]["sic_index"]
+sic_index_df = sic_data_access.load_sic_index(sic_index_filepath)
+
+sic_index_df.sample(5, random_state=seed)
+
+```
+
+## Load SIC structure
+
+```{python}
+#| code-summary: "Code: Load SIC structure"
+sic_structure_filepath = config["lookups"]["sic_structure"]
+sic_df = sic_data_access.load_sic_structure(sic_structure_filepath)
+
+sic_df.sample(5, random_state=seed)
+```
+
+## Create SIC hierarchy
+
+```{python}
+#| code-summary: "Code: Create SIC hierarchy"
+sic = sic_hierarchy.load_hierarchy(sic_df, sic_index_df)
+
+print(f"There are {len(sic):,} entries in the hierarcy")
+```
+
+## Example lookup
+
+Supports a variety of common formatting patterns for SIC.
+Sometimes 4-digit SIC serve as 5-digit SIC
+```{python}
+#| code-summary: "Code: Example lookup"
+print(sic["A011xx"])
+print(sic["A011"])
+print(sic["011"])
+print(sic["01.1"])
+
+print(sic["A0111x"])
+print(sic["0111"])
+print(sic["01110"])
+```
+
+## Select a random example
+
+```{python}
+#| code-summary: "Code: Example SIC index entry"
+random.seed(seed)
+sic_node = random.choice(sic.nodes)
+
+sic_node.print_all()
+```

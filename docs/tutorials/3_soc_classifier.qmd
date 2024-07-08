@@ -1,0 +1,108 @@
+---
+title: "3. SOC classifier"
+execute:
+  warning: False
+format:
+  html:
+    code-fold: show
+---
+
+Demonstration notebook for the `ClassificationLLM` with Standard Occupational Classification (SOC) codes.
+
+```{python}
+#| code-summary: "Code: Import methods and initialise"
+from langchain.llms.fake import FakeListLLM
+
+from sic_soc_llm import setup_logging
+from sic_soc_llm.llm import ClassificationLLM
+
+logger = setup_logging("soc_classifier")
+```
+
+```{python}
+#| echo: false
+#| code-summary: "Code: Create a fake Large Language Model (LLM) for demonstration purposes"
+
+soc_demo_llm = FakeListLLM(responses=[
+'''
+{"codable": true, "followup": null, "soc_code": "9265", "soc_descriptive": "Bar staff", "soc_candidates": [{"soc_code": "9265", "soc_descriptive": "Bar staff", "likelihood": 1.0}], "soc_code_2digits": "92", "reasoning": "The job title \'barman\' and the job description \'barman at local golf club\' clearly indicate that the respondent\'s job involves serving drinks at a bar, which aligns with the SOC code 9265 for \'Bar staff\'."}
+''',
+'''
+{  "codable": true,  "followup": null,  "soc_code": "1221",  "soc_descriptive": "Hotel and accommodation managers and proprietors",  "soc_candidates": [    {      "soc_code": "1221",      "soc_descriptive": "Hotel and accommodation managers and proprietors",      "likelihood": 1    }  ],  "soc_code_2digits": "12",  "reasoning": "The job title \'hotel night manager\' and the company\'s main activity being a hotel aligns with the SOC code 1221 for \'Hotel and accommodation managers and proprietors\'. The job description, although unclear, seems to involve duties that could be associated with this role."}''',
+'''
+{  "codable": false,  "followup": "Could you please provide more details about your daily tasks and responsibilities in this role?",  "soc_code": null,  "soc_descriptive": null,  "soc_candidates": [    {      "soc_code": "2139",      "soc_descriptive": "Information technology professionals n.e.c.",      "likelihood": 0.7    }  ],  "soc_code_2digits": "21",  "reasoning": "The job title \'functional consultant\' and the job description \'provide consultancy on system configuration\' suggest a role in IT consultancy. However, more specific information about the tasks and responsibilities of the role is needed to assign a more accurate SOC code."}
+''',
+'''
+{"codable": true, "followup": null, "soc_code": "6213", "soc_descriptive": "Air travel assistants", "soc_candidates": [{"soc_code": "6213", "soc_descriptive": "Air travel assistants", "likelihood": 0.9}], "soc_code_2digits": "62", "reasoning": "The job title \'senior airport services agent\' and the job description \'customer service\' in the context of an airline company suggest that the respondent\'s role involves assisting passengers and providing customer service in an airport setting. This aligns with the SOC code 6213 for \'Air travel assistants\'."}
+''',
+'''
+{  "codable": false,  "followup": "Could you please provide more specific information about your job responsibilities and the nature of the materials you work with?",  "soc_code": null,  "soc_descriptive": null,  "soc_candidates": [    {      "soc_code": "2125",      "soc_descriptive": "Production and Process Engineers",      "likelihood": 0.5    },    {      "soc_code": "2122",      "soc_descriptive": "Mechanical Engineers",      "likelihood": 0.5    }  ],  "soc_code_2digits": "21",  "reasoning": "The job title translates to \'Engineer\' and the company\'s main activity involves \'Processing Materials\'. This could correspond to several engineering roles within the \'21\' SOC code category, but without more specific information, it is not possible to determine the exact SOC code."}
+'''
+])
+```
+
+The example SOC classifier uses a one-shot prompt to classify respondent's data. In particular, there is no retrieval step (to reduce the list of candidate codes) and the whole condensed index is included in the prompt. Note that the `soc_demo_llm` should be replaced with the LLM of your choice.
+
+```{python}
+#| code-summary: "Code: Initialise the SOC classifier"
+soc_llm = ClassificationLLM(llm=soc_demo_llm)
+```
+
+## Example SOC classifications
+
+Load a few examples of possible survey responses and classify them using the SOC classifier.
+
+```{python}
+#| code-summary: "Code: Input and classify examples"
+soc_examples = [
+    {
+        "job_title": "barman",
+        "job_description": "barman at local golf club",
+        "employer_activities": "golf club",
+    },
+    {
+        "job_title": "hotel night manager",
+        "job_description": """hight potter reception closing documents
+            breakfast preparation""",
+        "employer_activities": "hotel",
+    },
+    {
+        "job_title": "functional consultant",
+        "job_description": "provide cnsultancy on system configuration",
+        "employer_activities": "technology provide deliver enterprise software",
+    },
+    {
+        "job_title": "senior airport services agent",
+        "job_description": "customer service",
+        "employer_activities": "airline",
+    },
+    {
+        "job_title": "PEIRIANYDD",
+        "job_description": "TRWSHIO",
+        "employer_activities": "TRIN PERIANAU",
+    },
+]
+
+for item in soc_examples:
+    # Get response from LLM
+    response = soc_llm.get_soc_code(
+            item["job_title"],
+            item["job_description"],
+            level_of_education="Unknown",
+            manage_others="Unknown",
+            industry_descr=item["employer_activities"],
+        )
+
+    # Print the output
+    print("Input:")
+    for v, w in item.items():
+        print(f"  {v}: {w}")
+    print('')
+
+    print("Response:")
+    for x,y  in response.__dict__.items():
+        print (f"  {x}: {y}")
+    print("")
+    print('===========================================')
+    print("")
+```

@@ -1,0 +1,156 @@
+---
+title: "2. SIC classifier"
+execute:
+  warning: False
+format:
+  html:
+    code-fold: show
+---
+
+Demonstration notebook for the `ClassificationLLM` using Retrieval Augmented Generation (RAG) with Standard Industrial Classification (SIC) codes.
+
+```{python}
+#| code-summary: "Code: Import methods and initialise"
+from sic_soc_llm import setup_logging, get_config
+from sic_soc_llm.embedding import EmbeddingHandler
+from sic_soc_llm.llm import ClassificationLLM
+
+logger = setup_logging('sic_classifier')
+config = get_config()
+```
+
+```{python}
+#| code-summary: "Code: Make sure the SIC datasets are available"
+#| echo: false
+
+import requests
+from pathlib import Path
+import hashlib
+
+sic_urls = [
+    "https://www.ons.gov.uk/file?uri=/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007/publisheduksicsummaryofstructureworksheet.xlsx",
+    "https://www.ons.gov.uk/file?uri=/methodology/classificationsandstandards/ukstandardindustrialclassificationofeconomicactivities/uksic2007/uksic2007indexeswithaddendumdecember2022.xlsx"
+]
+
+file_paths = [
+    Path(config['lookups']['sic_structure']),
+    Path(config["lookups"]["sic_index"])
+]
+
+expected_hashes = [
+    'f5090c89938b1f24f7b1498530bc99f520abf4198a3af3f3655814c094cc0944',
+    '3d6bf9d0950b8b9836d3590001cb391ac4338a8319a4b519483ad17f0d51f085'
+]
+
+for url, file_path, expected_hash in zip(sic_urls, file_paths, expected_hashes):
+    if not file_path.exists():
+        r = requests.get(url)
+        file_path.parent.mkdir(exist_ok=True, parents=True)
+        with open(file_path, 'wb') as outfile:
+            outfile.write(r.content)
+
+        # Calculate the SHA256 hash of the downloaded file
+        hash_object = hashlib.sha256()
+        hash_object.update(r.content)
+        file_hash = hash_object.hexdigest()
+        if file_hash != expected_hash:
+            raise ValueError(f"Downloaded file {file_path} has incorrect hash {file_hash}, expected {expected_hash}")
+```
+
+```{python}
+#| echo: false
+#| code-summary: "Code: Create a fake Large Language Model (LLM) for demonstration purposes"
+from langchain.llms.fake import FakeListLLM
+
+sic_demo_llm = FakeListLLM(responses=[
+'''
+{ "codable": true, "sic_code": "86101", "sic_descriptive": "Hospital activities", "sic_candidates": [   {     "sic_code": "86101",     "sic_descriptive": "Hospital activities",     "likelihood": 0.9   },   {     "sic_code": "86220",     "sic_descriptive": "Specialist medical practice activities",     "likelihood": 0.1   } ], "reasoning": "The company\'s main activity is providing care to patients, which aligns with the \'Hospital activities\' SIC code. The job title and description also suggest a hospital setting. However, there is a small possibility that the company could fall under \'Specialist medical practice activities\' as the job title is a specialist role."}
+''',
+'''
+{ "codable": true, "sic_code": "03110", "sic_descriptive": "Marine fishing", "sic_candidates": [   {     "sic_code": "03110",     "sic_descriptive": "Marine fishing",     "likelihood": 1   } ], "reasoning": "The company\'s main activity is described as \'catching fish on the north sea from grimsby port\', which aligns with the \'Marine fishing\' category under SIC code 03110."}
+''',
+'''{ "codable": true, "sic_code": "66190", "sic_descriptive": "Other activities auxiliary to financial services, except insurance and pension funding", "sic_candidates": [   {     "sic_code": "66190",     "sic_descriptive": "Other activities auxiliary to financial services, except insurance and pension funding",     "likelihood": 0.7   },   {     "sic_code": "64191",     "sic_descriptive": "Banks",     "likelihood": 0.2   },   {     "sic_code": "64991",     "sic_descriptive": "Security dealing on own account",     "likelihood": 0.1   } ], "reasoning": "The company\'s main activity is bitcoin trading, which falls under \'Other activities auxiliary to financial services, except insurance and pension funding\'. However, it could also potentially fall under \'Banks\' or \'Security dealing on own account\', but these are less likely."}
+''',
+'''{ "codable": true, "sic_code": "85590", "sic_descriptive": "Other education nec", "sic_candidates": [   {     "sic_code": "85590",     "sic_descriptive": "Other education nec",     "likelihood": 0.9   },   {     "sic_code": "85600",     "sic_descriptive": "Educational support activities",     "likelihood": 0.1   } ], "reasoning": "The company\'s main activity of matching tutors to pupils for extra help outside of school aligns with the \'Other education nec\' category (SIC code 85590). The job description of helping GCSE and A level students achieve the best possible results further supports this classification. The \'Educational support activities\' category (SIC code 85600) could also be a possibility, but is less likely given the specific tutoring focus of the company."}
+'''
+])
+
+# populate the vector store with tiny index for demo purposes
+embed = EmbeddingHandler()
+if embed._index_size == 0:
+    index_filepath = config["lookups"]["sic_condensed"]
+    with open(index_filepath) as file_object:
+        embed.embed_index(file_object=file_object)
+```
+
+For the retrieval part of the RAG based SIC classification a correctly populated vector store is required. By default the `EmbeddingHandler` would load `SIC` data structure with all its activities using files specified in the `sic_soc_llm_config.toml`. This may take several minutes.
+
+For more details about the `SIC` data structure and the data files required for it, see the [SIC data structure tutorial](1_sic_data_structure.html).
+
+```{python}
+#| code-summary: "Code: Populate vector store"
+embed = EmbeddingHandler()
+if embed._index_size == 0:
+    embed.embed_index()
+```
+
+As we have already initialised the `EmbeddingHandler` we can pass it to the `ClassificationLLM` object; this is not essential as the `ClassificationLLM` will initialise its own `EmbeddingHandler` if one is not provided (based on the same config values). Note that the `sic_demo_llm` should be replaced with the LLM of your choice.
+
+```{python}
+#| code-summary: "Code: Initialise the SIC classifier"
+sic_llm = ClassificationLLM(llm=sic_demo_llm, embedding_handler=embed)
+```
+
+
+## Example SIC classification
+
+Load a few examples of possible survey responses and classify them using the SIC classifier.
+
+```{python}
+#| code-summary: "Code: Input and classify examples"
+sic_examples = [
+    {
+        "industry_descr": "we provide care to thousands of patients across north east lincolnshire",
+        "job_title": "anaesthetist",
+        "job_description": "give anaesthetics for surgical, medical and psychiatric procedures"
+    },
+    {
+        "industry_descr": "we catch fish on the north sea from grimsby port",
+        "job_title": None,
+        "job_description": None
+    },
+    {
+        "industry_descr": "bitcoin trading",
+        "job_title": None,
+        "job_description": None
+
+    },
+    {
+        "industry_descr": "we match tutors to pupils for extra help outside of school",
+        "job_title": None,
+        "job_description": "help gcse and a level students achieve the best possible results"
+    },
+]
+
+for item in sic_examples:
+    # Get response from LLM
+    response, short_list, call_dict = sic_llm.rag_sic_code(
+            industry_descr = item["industry_descr"],
+            job_title = item["job_title"],
+            job_description = item["job_description"],
+        )
+
+    # Print the output
+    print("Input:")
+    for v, w in item.items():
+        print(f"  {v}: {w}")
+    print('')
+
+    print("Response:")
+    for x,y  in response.__dict__.items():
+        print (f"  {x}: {y}")
+    print("")
+    print('===========================================')
+    print("")
+
+```

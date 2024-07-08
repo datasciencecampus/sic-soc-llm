@@ -1,0 +1,95 @@
+project:
+  type: website
+  render:
+    - /*.qmd
+    - tutorials/*.qmd
+    - reference/*.qmd
+  preview:
+    port: 1111
+    browser: true
+    watch-inputs: true
+    navigate: true
+  resources:
+    - _static/
+
+website:
+  title: sic-soc-llm
+  navbar:
+    left:
+      - href: index.qmd
+        text: About
+      - href: method.qmd
+        text: Method
+      - href: tutorials/index.qmd
+        text: Tutorials
+      - href: reference/index.qmd
+        text: Reference
+    right:
+      - icon: github
+        url: https://github.com/datasciencecampus/sic-soc-llm
+  reader-mode: false
+  page-footer:
+    left: >
+      All content is available under the
+      [Open Government Licence V3.0](http://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/),
+      except where otherwise stated.
+    center: >
+      Built using [Quarto](https://quarto.org/).
+
+format:
+  html:
+    mainfont: Arial
+    theme:
+      dark: cyborg
+      light: cosmo
+    lang: en-GB
+
+metadata-files:
+  - reference/_sidebar.yml
+
+quartodoc:
+  parser: google
+  title: LLM based classification
+  package: sic_soc_llm
+  dir: reference
+  sidebar: reference/_sidebar.yml
+  sections:
+    - title: Classification module
+      desc: >
+        Large Language Model based classification main handlers.
+      package: sic_soc_llm
+      contents:
+        - embedding.EmbeddingHandler
+        - llm.ClassificationLLM
+        - prompt.PromptTemplates
+
+    - subtitle: Response models
+      package: sic_soc_llm.data_models.response_model
+      contents:
+      - SocCandidate
+      - SocResponse
+      - SicCandidate
+      - SicResponse
+      - RagCandidate
+      - RagResponse
+
+    - title: SIC Index Abstraction
+      desc: >
+        Data models to represent Standard Industry Classiffication
+      package: sic_soc_llm.data_models.sic_hierarchy
+      contents:
+        - SIC
+        - SicCode
+        - SicNode
+    - subtitle: SIC metadata
+      package: sic_soc_llm.data_models
+      contents:
+        - sic_meta_model.ClassificationMeta
+        - sicDB.SicMeta
+    - title: Helpers
+      desc: Config and Log utils
+      package: sic_soc_llm
+      contents:
+        - setup_logging
+        - get_config
+        - check_file_exists

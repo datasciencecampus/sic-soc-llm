@@ -1,0 +1,22 @@
+# Ignore all files and folders
+*
+
+# Allow selected files and folders
+!app.yaml
+!Dockerfile
+!pyproject.toml
+!app/
+!src/
+src/*
+!src/sic_soc_llm/
+!data/
+data/*
+!data/sic-index/
+!data/soc-index/
+!data/coicop-index/
+!data/custom-index/
+data/custom-index/*
+!data/custom-index/example-index.txt
+
+# ignore pycache
+**/__pycache__/

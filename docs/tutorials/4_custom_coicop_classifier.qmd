@@ -1,0 +1,118 @@
+---
+title: "4. Custom (COICOP) classifier"
+format:
+  html:
+    code-fold: show
+---
+
+Demonstration notebook for the `ClassificationLLM` using RAG with a custom index. In this demo, the Classification of Individual Consumption According to Purpose (COICOP) index is used.
+
+```{python}
+#| code-summary: "Code: Import methods and initialise"
+#| output: false
+from sic_soc_llm import setup_logging, get_config
+from sic_soc_llm.llm import ClassificationLLM
+from sic_soc_llm.embedding import EmbeddingHandler
+
+logger = setup_logging('coicop_notebook')
+config = get_config()
+```
+
+
+```{python}
+#| echo: false
+from langchain.llms.fake import FakeListLLM
+
+coicop_demo_llm = FakeListLLM(responses=[
+    '''
+{
+  "codable": true,
+  "class_code": "CP01141",
+  "class_descriptive": "Whole milk",
+  "alt_candidates": [
+    {
+      "class_code": "CP01146",
+      "class_descriptive": "Other milk products",
+      "likelihood": 0.1
+    },
+    {
+      "class_code": "CP01199",
+      "class_descriptive": "Other food products n.e.c.",
+      "likelihood": 0.05
+    }
+  ],
+  "reasoning": "The respondent's data mentions 'organic whole milk' which directly matches with the 'Whole milk' category in the classification index. Although the milk is organic, there is no separate category for organic milk in the provided subset of classification index. Therefore, the most suitable classification code is 'CP01141' for 'Whole milk'. Other possible but less likely categories could be 'Other milk products' or 'Other food products n.e.c.'."
+}
+''','''
+{
+  "codable": false,
+  "followup": "Is the item intended for men or women?",
+  "class_code": null,
+  "class_descriptive": null,
+  "alt_candidates": [
+    {
+      "class_code": "CP03121",
+      "class_descriptive": "Garments for men",
+      "likelihood": 0.5
+    },
+    {
+      "class_code": "CP03122",
+      "class_descriptive": "Garments for women",
+      "likelihood": 0.5
+    }
+  ],
+  "reasoning": "The item 'skinny jeans' can be classified as either 'Garments for men' or 'Garments for women'. Without information on the intended gender for the item, a definitive classification cannot be made."
+}
+''','''
+{
+  "codable": true,
+  "class_code": "CP06220",
+  "class_descriptive": "Dental services",
+  "alt_candidates": [],
+  "reasoning": "The respondent's data mentions 'tooth filling' which is a service provided by dentists. Therefore, the classification code 'CP06220' for 'Dental services' is the most appropriate."
+}'''
+])
+```
+
+## Load COICOP or other custom index
+
+The expected format of the custom index is a text file with each line containing one index entry in the format `class_code : class_descriptive`. The following code snippet demonstrates how to load and embed the COICOP index. This embedding is saved in a vector store that is used in the retrieval step of RAG based classification in `ClassificationLLM`. Note that the `coicop_demo_llm` should be replaced with the LLM of your choice.
+
+```{python}
+#| code-summary: "Code: Load COICOP index"
+#| warning: false
+index_filepath = config["lookups"]["coicop_condensed"]
+with open(index_filepath) as file_object:
+    for _ in range(5):
+        print(next(file_object))
+
+embed = EmbeddingHandler(db_dir=None)
+with open(index_filepath) as file_object:
+    embed.embed_index(file_object=file_object)
+
+coicop_llm = ClassificationLLM(embedding_handler=embed, llm = coicop_demo_llm)
+```
+
+## Example classification using COICOP index
+
+The following code block demonstrates how to classify a few examples using the COICOP index. Note that the respondent data is passed as a dictionary. For different use cases, any custom survey fields can be used as keys in the dictionary. `ClassificationLLM` uses the values that are present in the dictionary to retrieve the relevant information from the index and includes all the provided fields in the generative query step.
+
+```{python}
+#| code-summary: "Code: Example lookup"
+#| warning: false
+for item in ["organic whole milk", "skinny jeans", "tooth filling"]:
+    # Get response from LLM
+    response, short_list = coicop_llm.rag_general_code(respondent_data={"item": item})
+
+    # Print the output
+    print("Input:")
+    print(f" item:  {item}")
+    print('')
+    print("Response:")
+    for x,y  in response.__dict__.items():
+        print (f' {x}: {y}')
+    print(f" shortlist used in RAG: {short_list}")
+    print("")
+    print('===========================================')
+    print("")
+```

@@ -1,0 +1,75 @@
+[project]
+name = "sic_soc_llm"
+description = "An app for LLM based SIC/SOC Classification"
+authors = [{name = "Data Science Campus", email = "datasciencecampus@ons.gov.uk"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dynamic = ["version"]
+dependencies = [
+    "toml==0.10.2",
+    "numpy==1.26.3",
+    "pandas==2.1.4",
+    "langchain==0.1.0",
+    "langchain-google-vertexai==0.0.1",
+    "langchain-openai==0.0.2",
+    "openai==1.7.2",
+    "google-cloud-aiplatform==1.38.1",
+    "sentence-transformers==2.3.1",
+    "chromadb==0.4.22",
+    "autocorrect==2.6.1",
+    "pyfarmhash==0.3.2",
+    "openpyxl==3.1.2",
+    "pyprojroot==0.3.0",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Do not upload :: Internal project :: !"
+]
+
+[build-system]
+requires = ["setuptools>=62"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.dynamic]
+version = {attr = "sic_soc_llm.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = false
+
+[tool.setuptools.package-data]
+sic_soc_llm = [
+    "example_data/*.txt",
+    "_config/*.toml",
+]
+
+[project.optional-dependencies]
+app = [
+    "streamlit==1.30.0",
+    "python-dotenv==1.0.0",
+]
+test = [
+    "pytest==6.2.5",
+    "pytest-pythonpath==0.7.4",
+]
+
+docs = ["quartodoc>=0.6.6",
+        "ipykernel==6.23.2",
+        "nbclient==0.10.0",
+        "nbformat==5.9.2",
+]
+
+dev = [
+    "pre-commit==3.3.3",
+    "dill==0.3.8",
+    "matplotlib_venn==0.11.10",
+    "sic_soc_llm[app]",
+    "sic_soc_llm[test]",
+    "sic_soc_llm[docs]"
+]
+
+[project.urls]
+homepage = "https://github.com/datasciencecampus/sic-soc-llm"
