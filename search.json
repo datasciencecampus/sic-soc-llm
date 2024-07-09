@@ -1,5 +1,194 @@
 [
   {
+    "objectID": "reference/sic_meta_model.ClassificationMeta.html",
+    "href": "reference/sic_meta_model.ClassificationMeta.html",
+    "title": "sic_meta_model.ClassificationMeta",
+    "section": "",
+    "text": "data_models.sic_meta_model.ClassificationMeta()\nRepresents a classification meta model.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncode\nstr\nCategory code. Either a full code or a partial code for a larger hierarchical group. Partial code has last digits replaced by ‘x’.\n\n\ntitle\nstr\nShort descriptive title of the code category.\n\n\ndetail\nstr\nDescriptive label of the category associated with the code.\n\n\nincludes\nList[str]\nOptional list of titles that should be included in this category.\n\n\nexcludes\nList[str]\nOptional list of titles that should be excluded from this category.\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\ncheck_code_match\nCheck for partial match of the code.\n\n\npretty_print\nPrints nicely the present fields.\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.check_code_match(subcode)\nCheck for partial match of the code. Discards 1st letter on SIC and then check only valid numbers.\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nsubcode\nstr\n2-5 digits code for matching\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nbool\nif partial match found\n\n\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.pretty_print(subset_digits=[4, 2])\nPrints nicely the present fields.\n\n\n\n\n\nType\nDescription\n\n\n\n\nstr\ndescription"
+  },
+  {
+    "objectID": "reference/sic_meta_model.ClassificationMeta.html#attributes",
+    "href": "reference/sic_meta_model.ClassificationMeta.html#attributes",
+    "title": "sic_meta_model.ClassificationMeta",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\ncode\nstr\nCategory code. Either a full code or a partial code for a larger hierarchical group. Partial code has last digits replaced by ‘x’.\n\n\ntitle\nstr\nShort descriptive title of the code category.\n\n\ndetail\nstr\nDescriptive label of the category associated with the code.\n\n\nincludes\nList[str]\nOptional list of titles that should be included in this category.\n\n\nexcludes\nList[str]\nOptional list of titles that should be excluded from this category."
+  },
+  {
+    "objectID": "reference/sic_meta_model.ClassificationMeta.html#methods",
+    "href": "reference/sic_meta_model.ClassificationMeta.html#methods",
+    "title": "sic_meta_model.ClassificationMeta",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\ncheck_code_match\nCheck for partial match of the code.\n\n\npretty_print\nPrints nicely the present fields.\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.check_code_match(subcode)\nCheck for partial match of the code. Discards 1st letter on SIC and then check only valid numbers.\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nsubcode\nstr\n2-5 digits code for matching\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nbool\nif partial match found\n\n\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.pretty_print(subset_digits=[4, 2])\nPrints nicely the present fields.\n\n\n\n\n\nType\nDescription\n\n\n\n\nstr\ndescription"
+  },
+  {
+    "objectID": "reference/setup_logging.html",
+    "href": "reference/setup_logging.html",
+    "title": "setup_logging",
+    "section": "",
+    "text": "setup_logging(script_name=None, log_dir=LOG_DIR)\nSet up console and file logging.\nThis will create a directory to log to if it doesn’t already exist.\nSafe to call in interactive environments without duplicating the logging.\nLogs on the same day will append to the same file for the same script_name.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nscript_name\nstr\nUsed in the filename for the logs.\nNone\n\n\nlog_dir\nPath or str\nDirectory to store logs in. Defaults to “~/logs”.\nLOG_DIR\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlogging.Logger\nLogger object with handlers set up."
+  },
+  {
+    "objectID": "reference/setup_logging.html#parameters",
+    "href": "reference/setup_logging.html#parameters",
+    "title": "setup_logging",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nscript_name\nstr\nUsed in the filename for the logs.\nNone\n\n\nlog_dir\nPath or str\nDirectory to store logs in. Defaults to “~/logs”.\nLOG_DIR"
+  },
+  {
+    "objectID": "reference/setup_logging.html#returns",
+    "href": "reference/setup_logging.html#returns",
+    "title": "setup_logging",
+    "section": "",
+    "text": "Type\nDescription\n\n\n\n\nlogging.Logger\nLogger object with handlers set up."
+  },
+  {
+    "objectID": "reference/llm.ClassificationLLM.html",
+    "href": "reference/llm.ClassificationLLM.html",
+    "title": "llm.ClassificationLLM",
+    "section": "",
+    "text": "llm.ClassificationLLM(self, model_name=config['llm']['llm_model_name'], llm=None, embedding_handler=None, max_tokens=1600, temperature=0.0, verbose=False, openai_api_key=None)\nWraps the logic for using an LLM to classify respondent’s data based on provided index. Includes direct (one-shot) generative llm method and Retrieval Augmented Generation (RAG).\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmodel_name\nstr\nName of the model. Defaults to the value in the config file. Used if no LLM object is passed.\nconfig['llm']['llm_model_name']\n\n\nllm\nLLM\nLLM to use. Optional.\nNone\n\n\nembedding_handler\nEmbeddingHandler\nEmbedding handler. Optional. If None a default embedding handler is retrieved based on config file.\nNone\n\n\nmax_tokens\nint\nMaximum number of tokens to generate. Defaults to 1600.\n1600\n\n\ntemperature\nfloat\nTemperature of the LLM model. Defaults to 0.0.\n0.0\n\n\nverbose\nbool\nWhether to print verbose output. Defaults to False.\nFalse\n\n\nopenai_api_key\nstr\nOpenAI API key. Optional, but needed for OpenAI models.\nNone\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nget_sic_code\nGenerates a SIC classification based on respondent’s data\n\n\nget_soc_code\nGenerates a SOC classification based on respondent’s data\n\n\nrag_general_code\nGenerates a classification answer based on respondent’s data\n\n\nrag_sic_code\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\nllm.ClassificationLLM.get_sic_code(industry_descr, job_title, job_description)\nGenerates a SIC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nDescription of the industry.\nrequired\n\n\njob_title\nstr\nTitle of the job.\nrequired\n\n\njob_description\nstr\nDescription of the job.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nGenerated response to the query.\n\n\n\n\n\n\n\nllm.ClassificationLLM.get_soc_code(job_title, job_description, level_of_education, manage_others, industry_descr)\nGenerates a SOC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\njob_title\nstr\nThe title of the job.\nrequired\n\n\njob_description\nstr\nThe description of the job.\nrequired\n\n\nlevel_of_education\nstr\nThe level of education required for the job.\nrequired\n\n\nmanage_others\nbool\nIndicates whether the job involves managing others.\nrequired\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSocResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error parsing the response from the LLM model.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_general_code(respondent_data, candidates_limit=7)\nGenerates a classification answer based on respondent’s data using RAG and custom index.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nrespondent_data\ndict\nA dictionary containing respondent data.\nrequired\n\n\ncandidates_limit\nint\nThe maximum number of candidate codes to consider. Defaults to 7.\n7\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nRagResponse\nThe generated classification response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_sic_code(industry_descr, job_title=None, job_description=None, expand_search_terms=True, code_digits=5, candidates_limit=5)\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\njob_title\nstr\nThe job title. Defaults to None.\nNone\n\n\njob_description\nstr\nThe job description. Defaults to None.\nNone\n\n\nexpand_search_terms\nbool\nWhether to expand the search terms to include job title and description. Defaults to True.\nTrue\n\n\ncode_digits\nint\nThe number of digits in the generated SIC code. Defaults to 5.\n5\n\n\ncandidates_limit\nint\nThe maximum number of SIC code candidates to consider. Defaults to 5.\n5\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly."
+  },
+  {
+    "objectID": "reference/llm.ClassificationLLM.html#parameters",
+    "href": "reference/llm.ClassificationLLM.html#parameters",
+    "title": "llm.ClassificationLLM",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmodel_name\nstr\nName of the model. Defaults to the value in the config file. Used if no LLM object is passed.\nconfig['llm']['llm_model_name']\n\n\nllm\nLLM\nLLM to use. Optional.\nNone\n\n\nembedding_handler\nEmbeddingHandler\nEmbedding handler. Optional. If None a default embedding handler is retrieved based on config file.\nNone\n\n\nmax_tokens\nint\nMaximum number of tokens to generate. Defaults to 1600.\n1600\n\n\ntemperature\nfloat\nTemperature of the LLM model. Defaults to 0.0.\n0.0\n\n\nverbose\nbool\nWhether to print verbose output. Defaults to False.\nFalse\n\n\nopenai_api_key\nstr\nOpenAI API key. Optional, but needed for OpenAI models.\nNone"
+  },
+  {
+    "objectID": "reference/llm.ClassificationLLM.html#methods",
+    "href": "reference/llm.ClassificationLLM.html#methods",
+    "title": "llm.ClassificationLLM",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nget_sic_code\nGenerates a SIC classification based on respondent’s data\n\n\nget_soc_code\nGenerates a SOC classification based on respondent’s data\n\n\nrag_general_code\nGenerates a classification answer based on respondent’s data\n\n\nrag_sic_code\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\nllm.ClassificationLLM.get_sic_code(industry_descr, job_title, job_description)\nGenerates a SIC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nDescription of the industry.\nrequired\n\n\njob_title\nstr\nTitle of the job.\nrequired\n\n\njob_description\nstr\nDescription of the job.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nGenerated response to the query.\n\n\n\n\n\n\n\nllm.ClassificationLLM.get_soc_code(job_title, job_description, level_of_education, manage_others, industry_descr)\nGenerates a SOC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\njob_title\nstr\nThe title of the job.\nrequired\n\n\njob_description\nstr\nThe description of the job.\nrequired\n\n\nlevel_of_education\nstr\nThe level of education required for the job.\nrequired\n\n\nmanage_others\nbool\nIndicates whether the job involves managing others.\nrequired\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSocResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error parsing the response from the LLM model.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_general_code(respondent_data, candidates_limit=7)\nGenerates a classification answer based on respondent’s data using RAG and custom index.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nrespondent_data\ndict\nA dictionary containing respondent data.\nrequired\n\n\ncandidates_limit\nint\nThe maximum number of candidate codes to consider. Defaults to 7.\n7\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nRagResponse\nThe generated classification response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_sic_code(industry_descr, job_title=None, job_description=None, expand_search_terms=True, code_digits=5, candidates_limit=5)\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\njob_title\nstr\nThe job title. Defaults to None.\nNone\n\n\njob_description\nstr\nThe job description. Defaults to None.\nNone\n\n\nexpand_search_terms\nbool\nWhether to expand the search terms to include job title and description. Defaults to True.\nTrue\n\n\ncode_digits\nint\nThe number of digits in the generated SIC code. Defaults to 5.\n5\n\n\ncandidates_limit\nint\nThe maximum number of SIC code candidates to consider. Defaults to 5.\n5\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly."
+  },
+  {
+    "objectID": "reference/get_config.html",
+    "href": "reference/get_config.html",
+    "title": "get_config",
+    "section": "",
+    "text": "get_config(config_name='sic_soc_llm_config.toml')\nFetch the configuration.\nLoads config from the filepath defined in CONFIG_FILEPATH.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nconfig_name\nPath or str\nThe name of the config file to load. Defaults to relative path “sic_soc_llm_config.toml” - in such case it looks for the config file in 1. current dir, 2. project dir, 3. user home and 4. package resources.\n'sic_soc_llm_config.toml'\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\ndict\nConfiguration for the system.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nFileNotFoundError\nIf the config file or required lookups not found."
+  },
+  {
+    "objectID": "reference/get_config.html#parameters",
+    "href": "reference/get_config.html#parameters",
+    "title": "get_config",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nconfig_name\nPath or str\nThe name of the config file to load. Defaults to relative path “sic_soc_llm_config.toml” - in such case it looks for the config file in 1. current dir, 2. project dir, 3. user home and 4. package resources.\n'sic_soc_llm_config.toml'"
+  },
+  {
+    "objectID": "reference/get_config.html#returns",
+    "href": "reference/get_config.html#returns",
+    "title": "get_config",
+    "section": "",
+    "text": "Type\nDescription\n\n\n\n\ndict\nConfiguration for the system."
+  },
+  {
+    "objectID": "reference/get_config.html#raises",
+    "href": "reference/get_config.html#raises",
+    "title": "get_config",
+    "section": "",
+    "text": "Type\nDescription\n\n\n\n\nFileNotFoundError\nIf the config file or required lookups not found."
+  },
+  {
+    "objectID": "reference/check_file_exists.html",
+    "href": "reference/check_file_exists.html",
+    "title": "check_file_exists",
+    "section": "",
+    "text": "check_file_exists(file_name='sic_soc_llm_config.toml')\nCheck if the file exists.\nIf relative path provided it will look for the file in these locations: 1. relative to the current working directory 2. ralative to project root directory 3. relative to user’s home directory 4. relative to the package resources\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nfile_name\nPath or str\nThe name of the file to check. Defaults to config file name.\n'sic_soc_llm_config.toml'\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nPath\nThe absolute path to the file if it exists, None otherwise."
+  },
+  {
+    "objectID": "reference/check_file_exists.html#parameters",
+    "href": "reference/check_file_exists.html#parameters",
+    "title": "check_file_exists",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nfile_name\nPath or str\nThe name of the file to check. Defaults to config file name.\n'sic_soc_llm_config.toml'"
+  },
+  {
+    "objectID": "reference/check_file_exists.html#returns",
+    "href": "reference/check_file_exists.html#returns",
+    "title": "check_file_exists",
+    "section": "",
+    "text": "Type\nDescription\n\n\n\n\nPath\nThe absolute path to the file if it exists, None otherwise."
+  },
+  {
+    "objectID": "reference/SocCandidate.html",
+    "href": "reference/SocCandidate.html",
+    "title": "SocCandidate",
+    "section": "",
+    "text": "data_models.response_model.SocCandidate()\nRepresents a candidate SOC code based on provided job title and description.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nsoc_code\nstr\nPlausible SOC code based on the provided job title and description.\n\n\nsoc_descriptive\nstr\nDescriptive label of the SOC category associated with soc_code.\n\n\nlikelihood\nfloat\nLikelihood of this soc_code with a value between 0 and 1."
+  },
+  {
+    "objectID": "reference/SocCandidate.html#attributes",
+    "href": "reference/SocCandidate.html#attributes",
+    "title": "SocCandidate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nsoc_code\nstr\nPlausible SOC code based on the provided job title and description.\n\n\nsoc_descriptive\nstr\nDescriptive label of the SOC category associated with soc_code.\n\n\nlikelihood\nfloat\nLikelihood of this soc_code with a value between 0 and 1."
+  },
+  {
+    "objectID": "reference/SicNode.html",
+    "href": "reference/SicNode.html",
+    "title": "SicNode",
+    "section": "",
+    "text": "data_models.sic_hierarchy.SicNode(self, sic_code, description)\nTree data structure where the nodes hold all data associated with a given SIC.\nThe SIC hierarchy is represented as several separate trees, with each section (e.g. “A”, “B”, “C”) as a root node.\n\n\n\n\n\nName\nDescription\n\n\n\n\nprint_all\nPrints all information about the SIC hierarchy.\n\n\n\n\n\ndata_models.sic_hierarchy.SicNode.print_all()\nPrints all information about the SIC hierarchy.\n\n\n\nThe string representation of the SIC hierarchy.\nThe section of the SIC code.\nThe parent of the current SIC hierarchy.\nThe children of the current SIC hierarchy.\nThe detail, includes, and excludes attributes of the SIC meta.\nThe activities associated with the SIC hierarchy."
+  },
+  {
+    "objectID": "reference/SicNode.html#methods",
+    "href": "reference/SicNode.html#methods",
+    "title": "SicNode",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nprint_all\nPrints all information about the SIC hierarchy.\n\n\n\n\n\ndata_models.sic_hierarchy.SicNode.print_all()\nPrints all information about the SIC hierarchy.\n\n\n\nThe string representation of the SIC hierarchy.\nThe section of the SIC code.\nThe parent of the current SIC hierarchy.\nThe children of the current SIC hierarchy.\nThe detail, includes, and excludes attributes of the SIC meta.\nThe activities associated with the SIC hierarchy."
+  },
+  {
+    "objectID": "reference/SicCandidate.html",
+    "href": "reference/SicCandidate.html",
+    "title": "SicCandidate",
+    "section": "",
+    "text": "data_models.response_model.SicCandidate()\nRepresents a candidate SIC code with associated information.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nsic_code\nstr\nPlausible SIC code based on the company activity description.\n\n\nsic_descriptive\nstr\nDescriptive label of the SIC category associated with sic_code.\n\n\nlikelihood\nfloat\nLikelihood of this sic_code with a value between 0 and 1."
+  },
+  {
+    "objectID": "reference/SicCandidate.html#attributes",
+    "href": "reference/SicCandidate.html#attributes",
+    "title": "SicCandidate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nsic_code\nstr\nPlausible SIC code based on the company activity description.\n\n\nsic_descriptive\nstr\nDescriptive label of the SIC category associated with sic_code.\n\n\nlikelihood\nfloat\nLikelihood of this sic_code with a value between 0 and 1."
+  },
+  {
+    "objectID": "reference/RagResponse.html",
+    "href": "reference/RagResponse.html",
+    "title": "RagResponse",
+    "section": "",
+    "text": "data_models.response_model.RagResponse()\nRepresents a response model for classification code assignment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide classification code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable classification assignment. Empty if codable=True.\n\n\nclass_code\nOptional[str]\nFull classification code (to the required number of digits) assigned based on provided respondent’s data. Empty if codable=False.\n\n\nclass_descriptive\nOptional[str]\nDescriptive label of the classification category associated with class_code if provided. Empty if codable=False.\n\n\nalt_candidates\nList[RagCandidate]\nShort list of less than ten possible or alternative classification codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nreasoning\nstr\nStep by step reasoning behind the classification selected. Specifies the information used to assign the SIC code or any additional information required to assign a SIC code."
+  },
+  {
+    "objectID": "reference/RagResponse.html#attributes",
+    "href": "reference/RagResponse.html#attributes",
+    "title": "RagResponse",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide classification code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable classification assignment. Empty if codable=True.\n\n\nclass_code\nOptional[str]\nFull classification code (to the required number of digits) assigned based on provided respondent’s data. Empty if codable=False.\n\n\nclass_descriptive\nOptional[str]\nDescriptive label of the classification category associated with class_code if provided. Empty if codable=False.\n\n\nalt_candidates\nList[RagCandidate]\nShort list of less than ten possible or alternative classification codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nreasoning\nstr\nStep by step reasoning behind the classification selected. Specifies the information used to assign the SIC code or any additional information required to assign a SIC code."
+  },
+  {
+    "objectID": "tutorials/index.html",
+    "href": "tutorials/index.html",
+    "title": "Tutorials",
+    "section": "",
+    "text": "These tutorials walk you through some of the essential workflows for sic-soc-llm.\n\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDescription\n\n\nReading Time\n\n\n\n\n\n\n1. SIC data structure\n\n\n\n\n\n2 min\n\n\n\n\n2. SIC classifier\n\n\n\n\n\n6 min\n\n\n\n\n3. SOC classifier\n\n\n\n\n\n5 min\n\n\n\n\n4. Custom (COICOP) classifier\n\n\n\n\n\n4 min\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "tutorials/3_soc_classifier.html",
+    "href": "tutorials/3_soc_classifier.html",
+    "title": "3. SOC classifier",
+    "section": "",
+    "text": "Demonstration notebook for the ClassificationLLM with Standard Occupational Classification (SOC) codes.\nCode: Import methods and initialise\nfrom sic_soc_llm import setup_logging\nfrom sic_soc_llm.llm import ClassificationLLM\n\nlogger = setup_logging(\"soc_classifier\")\nThe example SOC classifier uses a one-shot prompt to classify respondent’s data. In particular, there is no retrieval step (to reduce the list of candidate codes) and the whole condensed index is included in the prompt. Note that the soc_demo_llm should be replaced with the LLM of your choice.\nCode: Initialise the SOC classifier\nsoc_llm = ClassificationLLM(llm=soc_demo_llm)"
+  },
+  {
+    "objectID": "tutorials/3_soc_classifier.html#example-soc-classifications",
+    "href": "tutorials/3_soc_classifier.html#example-soc-classifications",
+    "title": "3. SOC classifier",
+    "section": "Example SOC classifications",
+    "text": "Example SOC classifications\nLoad a few examples of possible survey responses and classify them using the SOC classifier.\n\n\nCode: Input and classify examples\nsoc_examples = [\n    {\n        \"job_title\": \"barman\",\n        \"job_description\": \"barman at local golf club\",\n        \"employer_activities\": \"golf club\",\n    },\n    {\n        \"job_title\": \"hotel night manager\",\n        \"job_description\": \"\"\"hight potter reception closing documents\n            breakfast preparation\"\"\",\n        \"employer_activities\": \"hotel\",\n    },\n    {\n        \"job_title\": \"functional consultant\",\n        \"job_description\": \"provide cnsultancy on system configuration\",\n        \"employer_activities\": \"technology provide deliver enterprise software\",\n    },\n    {\n        \"job_title\": \"senior airport services agent\",\n        \"job_description\": \"customer service\",\n        \"employer_activities\": \"airline\",\n    },\n    {\n        \"job_title\": \"PEIRIANYDD\",\n        \"job_description\": \"TRWSHIO\",\n        \"employer_activities\": \"TRIN PERIANAU\",\n    },\n]\n\nfor item in soc_examples:\n    # Get response from LLM\n    response = soc_llm.get_soc_code(\n            item[\"job_title\"],\n            item[\"job_description\"],\n            level_of_education=\"Unknown\",\n            manage_others=\"Unknown\",\n            industry_descr=item[\"employer_activities\"],\n        )\n\n    # Print the output\n    print(\"Input:\")\n    for v, w in item.items():\n        print(f\"  {v}: {w}\")\n    print('')\n\n    print(\"Response:\")\n    for x,y  in response.__dict__.items():\n        print (f\"  {x}: {y}\")\n    print(\"\")\n    print('===========================================')\n    print(\"\")\n\n\nInput:\n  job_title: barman\n  job_description: barman at local golf club\n  employer_activities: golf club\n\nResponse:\n  codable: True\n  followup: None\n  soc_code: 9265\n  soc_descriptive: Bar staff\n  soc_candidates: [SocCandidate(soc_code='9265', soc_descriptive='Bar staff', likelihood=1.0)]\n  soc_code_2digits: 92\n  reasoning: The job title 'barman' and the job description 'barman at local golf club' clearly indicate that the respondent's job involves serving drinks at a bar, which aligns with the SOC code 9265 for 'Bar staff'.\n\n===========================================\n\nInput:\n  job_title: hotel night manager\n  job_description: hight potter reception closing documents\n            breakfast preparation\n  employer_activities: hotel\n\nResponse:\n  codable: True\n  followup: None\n  soc_code: 1221\n  soc_descriptive: Hotel and accommodation managers and proprietors\n  soc_candidates: [SocCandidate(soc_code='1221', soc_descriptive='Hotel and accommodation managers and proprietors', likelihood=1.0)]\n  soc_code_2digits: 12\n  reasoning: The job title 'hotel night manager' and the company's main activity being a hotel aligns with the SOC code 1221 for 'Hotel and accommodation managers and proprietors'. The job description, although unclear, seems to involve duties that could be associated with this role.\n\n===========================================\n\nInput:\n  job_title: functional consultant\n  job_description: provide cnsultancy on system configuration\n  employer_activities: technology provide deliver enterprise software\n\nResponse:\n  codable: False\n  followup: Could you please provide more details about your daily tasks and responsibilities in this role?\n  soc_code: None\n  soc_descriptive: None\n  soc_candidates: [SocCandidate(soc_code='2139', soc_descriptive='Information technology professionals n.e.c.', likelihood=0.7)]\n  soc_code_2digits: 21\n  reasoning: The job title 'functional consultant' and the job description 'provide consultancy on system configuration' suggest a role in IT consultancy. However, more specific information about the tasks and responsibilities of the role is needed to assign a more accurate SOC code.\n\n===========================================\n\nInput:\n  job_title: senior airport services agent\n  job_description: customer service\n  employer_activities: airline\n\nResponse:\n  codable: True\n  followup: None\n  soc_code: 6213\n  soc_descriptive: Air travel assistants\n  soc_candidates: [SocCandidate(soc_code='6213', soc_descriptive='Air travel assistants', likelihood=0.9)]\n  soc_code_2digits: 62\n  reasoning: The job title 'senior airport services agent' and the job description 'customer service' in the context of an airline company suggest that the respondent's role involves assisting passengers and providing customer service in an airport setting. This aligns with the SOC code 6213 for 'Air travel assistants'.\n\n===========================================\n\nInput:\n  job_title: PEIRIANYDD\n  job_description: TRWSHIO\n  employer_activities: TRIN PERIANAU\n\nResponse:\n  codable: False\n  followup: Could you please provide more specific information about your job responsibilities and the nature of the materials you work with?\n  soc_code: None\n  soc_descriptive: None\n  soc_candidates: [SocCandidate(soc_code='2125', soc_descriptive='Production and Process Engineers', likelihood=0.5), SocCandidate(soc_code='2122', soc_descriptive='Mechanical Engineers', likelihood=0.5)]\n  soc_code_2digits: 21\n  reasoning: The job title translates to 'Engineer' and the company's main activity involves 'Processing Materials'. This could correspond to several engineering roles within the '21' SOC code category, but without more specific information, it is not possible to determine the exact SOC code.\n\n==========================================="
+  },
+  {
     "objectID": "tutorials/1_sic_data_structure.html",
     "href": "tutorials/1_sic_data_structure.html",
     "title": "1. SIC data structure",
@@ -42,81 +231,53 @@
     "text": "Select a random example\n\n\nCode: Example SIC index entry\nrandom.seed(seed)\nsic_node = random.choice(sic.nodes)\n\nsic_node.print_all()\n\n\n32.99: \"Other manufacturing nec\"\nSection: C\nParent: 32.9: \"Manufacturing nec\"\nChildren: []\n\ndetail=\nincludes=[\"manufacture of protective safety equipment: fire-resistant and protective safety clothing linemen's safety belts and other belts for occupational use cork life preservers plastics hard hats and other personal safety equipment of plastics  fire-fighting protection suits metal safety headgear and other metal personal safety devices ear and noise plugs (e.g. for swimming and noise protection) gas masks\", 'manufacture of pens and pencils of all kinds whether or not mechanical', 'manufacture of pencil leads', 'manufacture of date, sealing or numbering stamps, hand-operated devices for printing, or embossing labels, hand printing sets, prepared typewriter ribbons and inked pads', 'manufacture of globes', 'manufacture of umbrellas, sun-umbrellas, walking sticks, seat-sticks', 'manufacture of buttons, press-fasteners, snap-fasteners, press-studs, slide fasteners', 'manufacture of cigarette lighters', 'manufacture of articles of personal use: smoking pipes, combs, hair slides, scent sprays, vacuum flasks and other vacuum vessels for personal or household use, wigs, false beards, eyebrows', \"manufacture of miscellaneous articles: candles, tapers and the like; artificial flowers, fruit and foliage; jokes and novelties; hand sieves and hand riddles; tailors' dummies; burial coffins etc.\", 'manufacture of floral baskets, bouquets, wreaths and similar articles', 'taxidermy activities']\nexcludes=['manufacture of lighter wicks', 'manufacture of workwear and service apparel (e.g. laboratory coats, work overalls, uniforms)', 'manufacture of paper novelties']\n\nActivities:\n    - Amber turning (manufacture)\n    - Artificial flowers and fruit made of paper (manufacture)\n    - Artificial flowers and fruit made of plastic (manufacture)\n    - Artificial flowers and fruit made of textiles (manufacture)\n    - Ballpoint pen and refill (manufacture)\n    - Bedfolder (manufacture)\n    - Bladder dressing (manufacture)\n    - Boiler covering (not asbestos or slag wool) (manufacture)\n    - Boiler packing (not asbestos or slag wool) (manufacture)\n    - Bone working (manufacture)\n    - Briar pipe (manufacture)\n    - Buttons (manufacture)\n    - Buttons made of glass (manufacture)\n    - Candle (manufacture)\n    - Carbon ribbon (manufacture)\n    - Carnival article (manufacture)\n    - Carry cot (manufacture)\n    - Cartridge refill for fountain pen (manufacture)\n    - Catgut (manufacture)\n    - Chalk for drawing or writing (manufacture)\n    - Cigarette lighter (manufacture)\n    - Coffin board (manufacture)\n    - Coffins (manufacture)\n    - Collar stud (manufacture)\n    - Combs (other than of hard rubber, plastic or metal) (manufacture)\n    - Conjuring apparatus (manufacture)\n    - Cork life preservers (manufacture)\n    - Crayon (manufacture)\n    - Cut, make, trim of fire-resistant and protective safety clothing, fee or contract basis (manufacture)\n    - Cutlery handles made of horn, ivory, tortoise shell, etc. (manufacture)\n    - Date sealing stamps (manufacture)\n    - Date stamp and accessories (manufacture)\n    - Devotional article (manufacture)\n    - Ear and noise plugs (e.g. For swimming and noise protection) (manufacture)\n    - Easel (manufacture)\n    - Embossing devices (hand operated) for labels (manufacture)\n    - False beard (manufacture)\n    - False eyebrow (manufacture)\n    - Feather curling (manufacture)\n    - Feather ornament (manufacture)\n    - Feather purifying (manufacture)\n    - Feather sorting (manufacture)\n    - Felt tipped pen (manufacture)\n    - Fibre tipped pen (manufacture)\n    - Fire resistant and protective safety clothing of leather (manufacture)\n    - Fire-fighting protection suits (manufacture)\n    - Firelighter (manufacture)\n    - Fire-resistant and protective safety clothing (manufacture)\n    - Flint for lighters (manufacture)\n    - Fountain pen (manufacture)\n    - Fountain pen nib (manufacture)\n    - Gas masks (manufacture)\n    - Gas masks (with mechanical parts or replaceable filters for protection against biological agents) (manufacture)\n    - Gauntlet (protective) (manufacture)\n    - Globes (manufacture)\n    - Gut for musical instruments and sports goods (manufacture)\n    - Gut scraping and spinning (manufacture)\n    - Hair pad making (manufacture)\n    - Hair preparation for wig making (manufacture)\n    - Hair slides (manufacture)\n    - Hand printing sets (manufacture)\n    - Hand riddles (manufacture)\n    - Hand sieves (manufacture)\n    - Hard hats and other personal safety equipment of plastics (manufacture)\n    - Horn and tortoise shell working (manufacture)\n    - Horn pressing (manufacture)\n    - Industrial protective headgear (manufacture)\n    - Ink pad (manufacture)\n    - Instruments for educational or exhibition purposes (manufacture)\n    - Ivory working (manufacture)\n    - Jokes and novelties (manufacture)\n    - Life vests made of cork (manufacture)\n    - Life vests non textile (manufacture)\n    - Lifebelts (manufacture)\n    - Lifebelts made of cork (manufacture)\n    - Lifebuoy made of cork (manufacture)\n    - Lifejacket made of cork (manufacture)\n    - Lifejacket non textile (manufacture)\n    - Lighter fuel in containers not exceeding 300cc (liquid or liquefied gas) (manufacture)\n    - Linemen's safety belts and other belts for occupational use (manufacture)\n    - Marker pen (manufacture)\n    - Masks incorporating eye protection or a facial shield (manufacture)\n    - Models for educational or exhibition purposes (manufacture)\n    - Models for geographical use made of wax or plaster (manufacture)\n    - Models made of plaster (manufacture)\n    - Models made of wax (manufacture)\n    - Natural sponge preparation (manufacture)\n    - Nightlight (manufacture)\n    - Numbering stamps (manufacture)\n    - Parasol (manufacture)\n    - Pastel (manufacture)\n    - Pen nibs (manufacture)\n    - Pencil (manufacture)\n    - Pencil leads (manufacture)\n    - Penholder (manufacture)\n    - Pens for writing or drawing (manufacture)\n    - Personal safety devices of metal (manufacture)\n    - Plaster cast (manufacture)\n    - Prepared typewriter ribbons (manufacture)\n    - Press-fasteners (manufacture)\n    - Press-studs (manufacture)\n    - Printing devices (hand operated) (manufacture)\n    - Propelling pencil (manufacture)\n    - Protective gloves for industrial use (manufacture)\n    - Protective headgear (manufacture)\n    - Protective headgear for industrial use (manufacture)\n    - Ribbon (inked) (manufacture)\n    - Riding caps (manufacture)\n    - Roller pens and refills (manufacture)\n    - Safety headgear made of metal (manufacture)\n    - Safety helmets made of plastic (manufacture)\n    - Scale models (manufacture)\n    - Scent sprays (manufacture)\n    - Scientific models for educational and exhibition purposes (manufacture)\n    - Sealing stamps (manufacture)\n    - Seals for use with sealing wax (manufacture)\n    - Seat-sticks (manufacture)\n    - Slates for writing (manufacture)\n    - Slide fasteners (manufacture)\n    - Smokers' requisites (manufacture)\n    - Smoking pipes (manufacture)\n    - Snap fasteners (manufacture)\n    - Sponge bleaching (manufacture)\n    - Sponge trimming (manufacture)\n    - Stamps made of rubber (manufacture)\n    - Stylographic pen (manufacture)\n    - Sun car (manufacture)\n    - Sunshade (manufacture)\n    - Sun-umbrellas (manufacture)\n    - Tailors' chalk (manufacture)\n    - Tailors' dummy (not plastic) (manufacture)\n    - Tapers and the like (manufacture)\n    - Taxidermy activities (manufacture)\n    - Teaching aids (electronic) (manufacture)\n    - Toothpicks made of bone (manufacture)\n    - Trainer (electronic training equipment) (manufacture)\n    - Typewriter ribbons (manufacture)\n    - Umbrella (manufacture)\n    - Uniform helmets (manufacture)\n    - Vacuum flask (complete) (manufacture)\n    - Vacuum jar (manufacture)\n    - Vacuum vessels for personal or household use (manufacture)\n    - Walking sticks (manufacture)\n    - Whalebone cutting and splitting (manufacture)\n    - Wig (manufacture)\n    - Writing instrument sets (manufacture)"
   },
   {
-    "objectID": "tutorials/4_custom_coicop_classifier.html",
-    "href": "tutorials/4_custom_coicop_classifier.html",
-    "title": "4. Custom (COICOP) classifier",
-    "section": "",
-    "text": "Demonstration notebook for the ClassificationLLM using RAG with a custom index. In this demo, the Classification of Individual Consumption According to Purpose (COICOP) index is used.\nCode: Import methods and initialise\nfrom sic_soc_llm import setup_logging, get_config\nfrom sic_soc_llm.llm import ClassificationLLM\nfrom sic_soc_llm.embedding import EmbeddingHandler\n\nlogger = setup_logging('coicop_notebook')\nconfig = get_config()"
-  },
-  {
-    "objectID": "tutorials/4_custom_coicop_classifier.html#load-coicop-or-other-custom-index",
-    "href": "tutorials/4_custom_coicop_classifier.html#load-coicop-or-other-custom-index",
-    "title": "4. Custom (COICOP) classifier",
-    "section": "Load COICOP or other custom index",
-    "text": "Load COICOP or other custom index\nThe expected format of the custom index is a text file with each line containing one index entry in the format class_code : class_descriptive. The following code snippet demonstrates how to load and embed the COICOP index. This embedding is saved in a vector store that is used in the retrieval step of RAG based classification in ClassificationLLM. Note that the coicop_demo_llm should be replaced with the LLM of your choice.\n\n\nCode: Load COICOP index\nindex_filepath = config[\"lookups\"][\"coicop_condensed\"]\nwith open(index_filepath) as file_object:\n    for _ in range(5):\n        print(next(file_object))\n\nembed = EmbeddingHandler(db_dir=None)\nwith open(index_filepath) as file_object:\n    embed.embed_index(file_object=file_object)\n\ncoicop_llm = ClassificationLLM(embedding_handler=embed, llm = coicop_demo_llm)\n\n\nCP01111: Rice\n\nCP01112: Flours and other cereals\n\nCP01113: Bread\n\nCP01114: Other bakery products\n\nCP01115: Pizza and quiche"
-  },
-  {
-    "objectID": "tutorials/4_custom_coicop_classifier.html#example-classification-using-coicop-index",
-    "href": "tutorials/4_custom_coicop_classifier.html#example-classification-using-coicop-index",
-    "title": "4. Custom (COICOP) classifier",
-    "section": "Example classification using COICOP index",
-    "text": "Example classification using COICOP index\nThe following code block demonstrates how to classify a few examples using the COICOP index. Note that the respondent data is passed as a dictionary. For different use cases, any custom survey fields can be used as keys in the dictionary. ClassificationLLM uses the values that are present in the dictionary to retrieve the relevant information from the index and includes all the provided fields in the generative query step.\n\n\nCode: Example lookup\nfor item in [\"organic whole milk\", \"skinny jeans\", \"tooth filling\"]:\n    # Get response from LLM\n    response, short_list = coicop_llm.rag_general_code(respondent_data={\"item\": item})\n\n    # Print the output\n    print(\"Input:\")\n    print(f\" item:  {item}\")\n    print('')\n    print(\"Response:\")\n    for x,y  in response.__dict__.items():\n        print (f' {x}: {y}')\n    print(f\" shortlist used in RAG: {short_list}\")\n    print(\"\")\n    print('===========================================')\n    print(\"\")\n\n\nInput:\n item:  organic whole milk\n\nResponse:\n codable: True\n followup: None\n class_code: CP01141\n class_descriptive: Whole milk\n alt_candidates: [RagCandidate(class_code='CP01146', class_descriptive='Other milk products', likelihood=0.1), RagCandidate(class_code='CP01199', class_descriptive='Other food products n.e.c.', likelihood=0.05)]\n reasoning: The respondent's data mentions 'organic whole milk' which directly matches with the 'Whole milk' category in the classification index. Although the milk is organic, there is no separate category for organic milk in the provided subset of classification index. Therefore, the most suitable classification code is 'CP01141' for 'Whole milk'. Other possible but less likely categories could be 'Other milk products' or 'Other food products n.e.c.'.\n shortlist used in RAG: [{'distance': 0.3467043936252594, 'title': ' Whole milk\\n', 'code': 'CP01141', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.5039432644844055, 'title': ' Other milk products\\n', 'code': 'CP01146', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.732480525970459, 'title': ' Preserved milk\\n', 'code': 'CP01143', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.7517219185829163, 'title': ' Low fat milk\\n', 'code': 'CP01142', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.0075042247772217, 'title': ' Yoghurt\\n', 'code': 'CP01144', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.0319883823394775, 'title': ' Other food products n.e.c.\\n', 'code': 'CP01199', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1342484951019287, 'title': ' Artificial sugar substitutes\\n', 'code': 'CP01186', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1362782716751099, 'title': ' Other cereal products\\n', 'code': 'CP01118', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1640747785568237, 'title': ' Other bakery products\\n', 'code': 'CP01114', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1741820573806763, 'title': ' Cheese and curd\\n', 'code': 'CP01145', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1743468046188354, 'title': ' Confectionery products\\n', 'code': 'CP01184', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1958932876586914, 'title': ' Olive oil\\n', 'code': 'CP01153', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2051900625228882, 'title': ' Pharmaceutical products\\n', 'code': 'CP06110', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.2462573051452637, 'title': ' Sugar\\n', 'code': 'CP01181', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2476091384887695, 'title': ' Other edible oils\\n', 'code': 'CP01154', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.248099684715271, 'title': ' Soft drinks\\n', 'code': 'CP01222', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.260750412940979, 'title': ' Rice\\n', 'code': 'CP01111', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2730278968811035, 'title': ' Other edible animal fats\\n', 'code': 'CP01155', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.275517225265503, 'title': ' Breakfast cereals\\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2833455801010132, 'title': ' Dried fruit and nuts\\n', 'code': 'CP01163', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}]\n\n===========================================\n\nInput:\n item:  skinny jeans\n\nResponse:\n codable: False\n followup: Is the item intended for men or women?\n class_code: None\n class_descriptive: None\n alt_candidates: [RagCandidate(class_code='CP03121', class_descriptive='Garments for men', likelihood=0.5), RagCandidate(class_code='CP03122', class_descriptive='Garments for women', likelihood=0.5)]\n reasoning: The item 'skinny jeans' can be classified as either 'Garments for men' or 'Garments for women'. Without information on the intended gender for the item, a definitive classification cannot be made.\n shortlist used in RAG: [{'distance': 1.0392100811004639, 'title': ' Garments for men\\n', 'code': 'CP03121', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.0935454368591309, 'title': ' Garments for women\\n', 'code': 'CP03122', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.1048060655593872, 'title': ' Clothing materials\\n', 'code': 'CP03110', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.1491382122039795, 'title': ' Clothing accessories\\n', 'code': 'CP03132', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.183807611465454, 'title': ' Clothes washing machines\\n', 'code': 'CP05312', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.2130918502807617, 'title': ' Other articles of clothing\\n', 'code': 'CP03131', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.276893973350525, 'title': ' Jams\\n', 'code': 'CP01182', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.289067029953003, 'title': ' Repair and hire of clothing\\n', 'code': 'CP03142', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.2973721027374268, 'title': ' Dried\\n', 'code': 'CP01127', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2973721027374268, 'title': ' Dried\\n', 'code': 'CP01135', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3091435432434082, 'title': ' Crisps\\n', 'code': 'CP01175', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3274515867233276, 'title': ' Bed linen\\n', 'code': 'CP05202', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3484004735946655, 'title': ' Pork\\n', 'code': 'CP01122', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3745285272598267, 'title': ' Footwear for men\\n', 'code': 'CP03211', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.3757548332214355, 'title': ' Irons\\n', 'code': 'CP05323', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.382058024406433, 'title': ' Breakfast cereals\\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3839713335037231, 'title': ' Cleaning of clothing\\n', 'code': 'CP03141', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.3974006175994873, 'title': ' Heaters\\n', 'code': 'CP05314', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3990007638931274, 'title': ' Camper vans\\n', 'code': 'CP09211', 'four_digit_code': 'CP09', 'two_digit_code': 'CP'}, {'distance': 1.4121779203414917, 'title': ' Cigarettes\\n', 'code': 'CP02201', 'four_digit_code': 'CP02', 'two_digit_code': 'CP'}]\n\n===========================================\n\nInput:\n item:  tooth filling\n\nResponse:\n codable: True\n followup: None\n class_code: CP06220\n class_descriptive: Dental services\n alt_candidates: []\n reasoning: The respondent's data mentions 'tooth filling' which is a service provided by dentists. Therefore, the classification code 'CP06220' for 'Dental services' is the most appropriate.\n shortlist used in RAG: [{'distance': 0.9580119848251343, 'title': ' Dental services\\n', 'code': 'CP06220', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.2639141082763672, 'title': ' Chocolate\\n', 'code': 'CP01183', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.266599416732788, 'title': ' Sugar\\n', 'code': 'CP01181', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2992039918899536, 'title': ' Tyres\\n', 'code': 'CP07211', 'four_digit_code': 'CP07', 'two_digit_code': 'CP'}, {'distance': 1.350462555885315, 'title': ' Bread\\n', 'code': 'CP01113', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3816957473754883, 'title': ' Crisps\\n', 'code': 'CP01175', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4047651290893555, 'title': ' Cutlery\\n', 'code': 'CP05402', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.4135578870773315, 'title': ' Cigarettes\\n', 'code': 'CP02201', 'four_digit_code': 'CP02', 'two_digit_code': 'CP'}, {'distance': 1.4301745891571045, 'title': ' Salt\\n', 'code': 'CP01192', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4436527490615845, 'title': ' Hearing aids\\n', 'code': 'CP06132', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.4493236541748047, 'title': ' Jewellery\\n', 'code': 'CP12311', 'four_digit_code': 'CP12', 'two_digit_code': 'CP'}, {'distance': 1.4624767303466797, 'title': ' Breakfast cereals\\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4685726165771484, 'title': ' Butter\\n', 'code': 'CP01151', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4742841720581055, 'title': ' Baby food\\n', 'code': 'CP01193', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4815491437911987, 'title': ' Coffee\\n', 'code': 'CP01211', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4819934368133545, 'title': ' Eggs\\n', 'code': 'CP01147', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4847772121429443, 'title': ' Lubricants\\n', 'code': 'CP07224', 'four_digit_code': 'CP07', 'two_digit_code': 'CP'}, {'distance': 1.4954712390899658, 'title': ' Whole milk\\n', 'code': 'CP01141', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.503591775894165, 'title': ' Edible offal\\n', 'code': 'CP01126', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.5097112655639648, 'title': ' Other cereal products\\n', 'code': 'CP01118', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}]\n\n==========================================="
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "This app/package has been created by the Data Science Campus as a proof of concept to evaluate Large Language Models (LLM) potential to assist with classification coding. It uses the LangChain library to perform Retrieval Augmented Generation (RAG) based on the provided classification index. A special case of Standard Industrial Classification (SIC) coding has been used as the primary test case, see method explanation. An example deployment using Streamlit allows for interactive exploration of the model’s capabilities.\n\n\n\nExamples of simplified SIC, Standard Occupational Classification (SOC) and Classification of Individual Consumption According to Purpose (COICOP) are included in the example_data folder. These condensed indices are flattened subsets of more detailed indices officially published online, such as the UK SIC 2007, UK SOC 2020, and COICOP 2018 (pdf).\n\n⚠️ Warning: The example data is provided for demonstration purposes only. No guarrantee is given for its accuracy or up to date status.\n\nIn this project, we focused on the SIC. A flexible representation of this hierarchical index (including metadata) has been implemented within the data_models submodule, enabling enhanced context for RAG/LLM. This representation can be used independently for other SIC coding tasks or easily extended to accommodate different classification indices.\nThe SIC index hierarchy object is built using three data sources provided by ONS:\n\nPublished UK SIC summary of structure worksheet (xlsx) - location needs to be specified in config\nUK SIC2007 indexes with addendum December 2022 (xlsx) - location needs to be specified in config\nSIC resource file by ONSdigital/dp-classification-tools (js) - included inside the package\n\n\n\n\n\n\nIt is recommended that you install the project with its required dependencies in a virtual environment. When the virtual environment is activated, any subsequent Python commands will use the Python interpreter and libraries specific to that isolated environment. This ensures that the project uses the correct versions of the dependencies specified in its requirements.\nCreate and activate a new virtual environment on Linux/OS X:\npython3.10 -m venv .venv\nsource .venv/bin/activate\n\n\n\nUpdate pip and install requirements:\npython -m pip install --upgrade pip\npython -m pip install -e \".[dev]\"\nThe -e flag installs the project in “editable” mode, which means that any changes made to the project code will be reflected immediately without the need to reinstall. The “.[dev]” part specifies that both the regular requirements and the development requirements should be installed.\n\n\n\nThe package provides code to use popular LLMs, access to the LLMs is a perquisite for use. Depending on your choice, keys/credentials may need to be added, for example:\n\nInclude a personal OpenAI API in .env as\n\nOPENAI_API_KEY=\"&lt;your key&gt;\"\n\nAuthenticate for Vertex AI:\n\ngcloud config set project \"&lt;PROJECT_ID&gt;\"\ngcloud auth application-default login\n\n\n\n\nExamples of how to use the sic-soc-llm package can be found in Tutorials and References.\n\n\nThe sic-soc-llm package uses a configuration file in TOML format to specify the paths to the data files and the names of the models to use. An example configuration file is provided in sic_soc_llm_config.toml and is read by the get_config function. The following fields are required:\n\n\n\n\n\n\n\n\nField\nType\nDefault value\n\n\n\n\n[lookups]\n\n\n\n\nsic_structure\nstr\n“data/sic-index/publisheduksicsummaryofstructureworksheet.xlsx”\n\n\nsic_index\nstr\n“data/sic-index/uksic2007indexeswithaddendumdecember2022.xlsx”\n\n\nsic_condensed\nstr\n“sic_2d_condensed.txt”\n\n\nsoc_condensed\nstr\n“soc_4d_condensed.txt”\n\n\ncoicop_condensed\nstr\n“coicop_5d_condensed.txt”\n\n\n[llm]\n\n\n\n\ndb_dir\nstr\n“data/sic-index/db”\n\n\nembedding_model_name\nstr\n“all-MiniLM-L6-v2”\n\n\nllm_model_name\nstr\n“gemini-pro”\n\n\n\nMake sure to update the file paths and model names according to your specific setup. While the condensed indexes (.txt) are included in the package, the .xlsx files need to be downloaded from the ONS website (mentioned above) and placed in the specified locations.\n\n\n\nTo run the Streamlit app, use the following command:\nstreamlit run app/Welcome.py --server.port 8500\nThe app will be available at http://localhost:8500/.\nExample commands used to build and deploy the app as a GCP Cloud Run service are provided in cloud_deploy.sh (which references Dockerfile and app.yaml). The Dockerfile contains a set of instructions for building a Docker image. It specifies the base image to use, the files and directories to include, the dependencies and the commands to run. The app.yaml file is used to specify the configuration of the Cloud Run service, including the container image to deploy, the service name, and the port to expose.\n\n\n\n\n\n\nThis repository contains a configuration of pre-commit hooks. If approaching this project as a developer, you are encouraged to install and enable pre-commits by running the following in your shell:\npip install pre-commit\npre-commit install\n\n\n\nTo run the unit tests, use the following command:\npython -m pytest\n\n\n\n\nBuild (Quatro markdown) reference files from docstrings:\n\ncd docs\npython -m quartodoc build\n\nRender webpage from Quarto markdowns in docs dir (including reference files):\n\nquarto render\n\n\n\n\n\nThe code, unless otherwise stated, is released under the MIT Licence. The documentation for this work is subject to © 2024 Crown Copyright (Office for National Statistics) and is available under the terms of the Open Government 3.0 licence.\n\n\n\nAt the Data Science Campus we apply data science, and build skills, for public good across the UK and internationally. Get in touch with the Campus at datasciencecampus@ons.gov.uk."
-  },
-  {
     "objectID": "index.html#overview",
     "href": "index.html#overview",
     "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "This app/package has been created by the Data Science Campus as a proof of concept to evaluate Large Language Models (LLM) potential to assist with classification coding. It uses the LangChain library to perform Retrieval Augmented Generation (RAG) based on the provided classification index. A special case of Standard Industrial Classification (SIC) coding has been used as the primary test case, see method explanation. An example deployment using Streamlit allows for interactive exploration of the model’s capabilities."
+    "section": "Overview",
+    "text": "Overview\nThis app/package has been created by the Data Science Campus as a proof of concept to evaluate Large Language Models (LLM) potential to assist with classification coding. It uses the LangChain library to perform Retrieval Augmented Generation (RAG) based on the provided classification index. A special case of Standard Industrial Classification (SIC) coding has been used as the primary test case, see method explanation. An example deployment using Streamlit allows for interactive exploration of the model’s capabilities."
   },
   {
     "objectID": "index.html#data-sources",
     "href": "index.html#data-sources",
     "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "Examples of simplified SIC, Standard Occupational Classification (SOC) and Classification of Individual Consumption According to Purpose (COICOP) are included in the example_data folder. These condensed indices are flattened subsets of more detailed indices officially published online, such as the UK SIC 2007, UK SOC 2020, and COICOP 2018 (pdf).\n\n⚠️ Warning: The example data is provided for demonstration purposes only. No guarrantee is given for its accuracy or up to date status.\n\nIn this project, we focused on the SIC. A flexible representation of this hierarchical index (including metadata) has been implemented within the data_models submodule, enabling enhanced context for RAG/LLM. This representation can be used independently for other SIC coding tasks or easily extended to accommodate different classification indices.\nThe SIC index hierarchy object is built using three data sources provided by ONS:\n\nPublished UK SIC summary of structure worksheet (xlsx) - location needs to be specified in config\nUK SIC2007 indexes with addendum December 2022 (xlsx) - location needs to be specified in config\nSIC resource file by ONSdigital/dp-classification-tools (js) - included inside the package"
+    "section": "Data sources",
+    "text": "Data sources\nExamples of simplified SIC, Standard Occupational Classification (SOC) and Classification of Individual Consumption According to Purpose (COICOP) are included in the example_data folder. These condensed indices are flattened subsets of more detailed indices officially published online, such as the UK SIC 2007, UK SOC 2020, and COICOP 2018 (pdf).\n\n⚠️ Warning: The example data is provided for demonstration purposes only. No guarrantee is given for its accuracy or up to date status.\n\nIn this project, we focused on the SIC. A flexible representation of this hierarchical index (including metadata) has been implemented within the data_models submodule, enabling enhanced context for RAG/LLM. This representation can be used independently for other SIC coding tasks or easily extended to accommodate different classification indices.\nThe SIC index hierarchy object is built using three data sources provided by ONS:\n\nPublished UK SIC summary of structure worksheet (xlsx) - location needs to be specified in config\nUK SIC2007 indexes with addendum December 2022 (xlsx) - location needs to be specified in config\nSIC resource file by ONSdigital/dp-classification-tools (js) - included inside the package"
   },
   {
     "objectID": "index.html#installation",
     "href": "index.html#installation",
     "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "It is recommended that you install the project with its required dependencies in a virtual environment. When the virtual environment is activated, any subsequent Python commands will use the Python interpreter and libraries specific to that isolated environment. This ensures that the project uses the correct versions of the dependencies specified in its requirements.\nCreate and activate a new virtual environment on Linux/OS X:\npython3.10 -m venv .venv\nsource .venv/bin/activate\n\n\n\nUpdate pip and install requirements:\npython -m pip install --upgrade pip\npython -m pip install -e \".[dev]\"\nThe -e flag installs the project in “editable” mode, which means that any changes made to the project code will be reflected immediately without the need to reinstall. The “.[dev]” part specifies that both the regular requirements and the development requirements should be installed.\n\n\n\nThe package provides code to use popular LLMs, access to the LLMs is a perquisite for use. Depending on your choice, keys/credentials may need to be added, for example:\n\nInclude a personal OpenAI API in .env as\n\nOPENAI_API_KEY=\"&lt;your key&gt;\"\n\nAuthenticate for Vertex AI:\n\ngcloud config set project \"&lt;PROJECT_ID&gt;\"\ngcloud auth application-default login"
+    "section": "Installation",
+    "text": "Installation\n\n1. Virtual environment\nIt is recommended that you install the project with its required dependencies in a virtual environment. When the virtual environment is activated, any subsequent Python commands will use the Python interpreter and libraries specific to that isolated environment. This ensures that the project uses the correct versions of the dependencies specified in its requirements.\nCreate and activate a new virtual environment on Linux/OS X:\npython3.10 -m venv .venv\nsource .venv/bin/activate\n\n\n2. Requirements\nUpdate pip and install requirements:\npython -m pip install --upgrade pip\npython -m pip install -e \".[dev]\"\nThe -e flag installs the project in “editable” mode, which means that any changes made to the project code will be reflected immediately without the need to reinstall. The “.[dev]” part specifies that both the regular requirements and the development requirements should be installed.\n\n\n3. LLM authentication:\nThe package provides code to use popular LLMs, access to the LLMs is a perquisite for use. Depending on your choice, keys/credentials may need to be added, for example:\n\nInclude a personal OpenAI API in .env as\n\nOPENAI_API_KEY=\"&lt;your key&gt;\"\n\nAuthenticate for Vertex AI:\n\ngcloud config set project \"&lt;PROJECT_ID&gt;\"\ngcloud auth application-default login"
   },
   {
     "objectID": "index.html#usage",
     "href": "index.html#usage",
     "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "Examples of how to use the sic-soc-llm package can be found in Tutorials and References.\n\n\nThe sic-soc-llm package uses a configuration file in TOML format to specify the paths to the data files and the names of the models to use. An example configuration file is provided in sic_soc_llm_config.toml and is read by the get_config function. The following fields are required:\n\n\n\n\n\n\n\n\nField\nType\nDefault value\n\n\n\n\n[lookups]\n\n\n\n\nsic_structure\nstr\n“data/sic-index/publisheduksicsummaryofstructureworksheet.xlsx”\n\n\nsic_index\nstr\n“data/sic-index/uksic2007indexeswithaddendumdecember2022.xlsx”\n\n\nsic_condensed\nstr\n“sic_2d_condensed.txt”\n\n\nsoc_condensed\nstr\n“soc_4d_condensed.txt”\n\n\ncoicop_condensed\nstr\n“coicop_5d_condensed.txt”\n\n\n[llm]\n\n\n\n\ndb_dir\nstr\n“data/sic-index/db”\n\n\nembedding_model_name\nstr\n“all-MiniLM-L6-v2”\n\n\nllm_model_name\nstr\n“gemini-pro”\n\n\n\nMake sure to update the file paths and model names according to your specific setup. While the condensed indexes (.txt) are included in the package, the .xlsx files need to be downloaded from the ONS website (mentioned above) and placed in the specified locations.\n\n\n\nTo run the Streamlit app, use the following command:\nstreamlit run app/Welcome.py --server.port 8500\nThe app will be available at http://localhost:8500/.\nExample commands used to build and deploy the app as a GCP Cloud Run service are provided in cloud_deploy.sh (which references Dockerfile and app.yaml). The Dockerfile contains a set of instructions for building a Docker image. It specifies the base image to use, the files and directories to include, the dependencies and the commands to run. The app.yaml file is used to specify the configuration of the Cloud Run service, including the container image to deploy, the service name, and the port to expose."
+    "section": "Usage",
+    "text": "Usage\nExamples of how to use the sic-soc-llm package can be found in Tutorials and References.\n\nConfiguration\nThe sic-soc-llm package uses a configuration file in TOML format to specify the paths to the data files and the names of the models to use. An example configuration file is provided in sic_soc_llm_config.toml and is read by the get_config function. The following fields are required:\n\n\n\n\n\n\n\n\nField\nType\nDefault value\n\n\n\n\n[lookups]\n\n\n\n\nsic_structure\nstr\n“data/sic-index/publisheduksicsummaryofstructureworksheet.xlsx”\n\n\nsic_index\nstr\n“data/sic-index/uksic2007indexeswithaddendumdecember2022.xlsx”\n\n\nsic_condensed\nstr\n“sic_2d_condensed.txt”\n\n\nsoc_condensed\nstr\n“soc_4d_condensed.txt”\n\n\ncoicop_condensed\nstr\n“coicop_5d_condensed.txt”\n\n\n[llm]\n\n\n\n\ndb_dir\nstr\n“data/sic-index/db”\n\n\nembedding_model_name\nstr\n“all-MiniLM-L6-v2”\n\n\nllm_model_name\nstr\n“gemini-pro”\n\n\n\nMake sure to update the file paths and model names according to your specific setup. While the condensed indexes (.txt) are included in the package, the .xlsx files need to be downloaded from the ONS website (mentioned above) and placed in the specified locations.\n\n\nRun and deploy Streamlit app\nTo run the Streamlit app, use the following command:\nstreamlit run app/Welcome.py --server.port 8500\nThe app will be available at http://localhost:8500/.\nExample commands used to build and deploy the app as a GCP Cloud Run service are provided in cloud_deploy.sh (which references Dockerfile and app.yaml). The Dockerfile contains a set of instructions for building a Docker image. It specifies the base image to use, the files and directories to include, the dependencies and the commands to run. The app.yaml file is used to specify the configuration of the Cloud Run service, including the container image to deploy, the service name, and the port to expose."
   },
   {
     "objectID": "index.html#development-and-testing",
     "href": "index.html#development-and-testing",
     "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "This repository contains a configuration of pre-commit hooks. If approaching this project as a developer, you are encouraged to install and enable pre-commits by running the following in your shell:\npip install pre-commit\npre-commit install\n\n\n\nTo run the unit tests, use the following command:\npython -m pytest\n\n\n\n\nBuild (Quatro markdown) reference files from docstrings:\n\ncd docs\npython -m quartodoc build\n\nRender webpage from Quarto markdowns in docs dir (including reference files):\n\nquarto render"
+    "section": "Development and testing",
+    "text": "Development and testing\n\n1. Pre-commit actions\nThis repository contains a configuration of pre-commit hooks. If approaching this project as a developer, you are encouraged to install and enable pre-commits by running the following in your shell:\npip install pre-commit\npre-commit install\n\n\n2. Unit tests\nTo run the unit tests, use the following command:\npython -m pytest\n\n\n3. Building documentation and webpage:\n\nBuild (Quatro markdown) reference files from docstrings:\n\ncd docs\npython -m quartodoc build\n\nRender webpage from Quarto markdowns in docs dir (including reference files):\n\nquarto render"
   },
   {
     "objectID": "index.html#license",
     "href": "index.html#license",
     "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "The code, unless otherwise stated, is released under the MIT Licence. The documentation for this work is subject to © 2024 Crown Copyright (Office for National Statistics) and is available under the terms of the Open Government 3.0 licence."
+    "section": "License",
+    "text": "License\n\nThe code, unless otherwise stated, is released under the MIT Licence. The documentation for this work is subject to © 2024 Crown Copyright (Office for National Statistics) and is available under the terms of the Open Government 3.0 licence."
   },
   {
     "objectID": "index.html#data-science-campus",
     "href": "index.html#data-science-campus",
     "title": "SIC-SOC-LLM",
-    "section": "",
-    "text": "At the Data Science Campus we apply data science, and build skills, for public good across the UK and internationally. Get in touch with the Campus at datasciencecampus@ons.gov.uk."
+    "section": "Data Science Campus",
+    "text": "Data Science Campus\nAt the Data Science Campus we apply data science, and build skills, for public good across the UK and internationally. Get in touch with the Campus at datasciencecampus@ons.gov.uk."
   },
   {
     "objectID": "method.html",
@@ -137,617 +298,7 @@
     "href": "method.html#rag-based-classification",
     "title": "Method",
     "section": "RAG based classification",
-    "text": "RAG based classification\nThe proposed LLM-based method for auto coding of free text survey responses involves two main steps. Our implementation follows the common Retrieval Augmented Generation (RAG) design, for overview see Figure 1.\n\n\n\n\n\n\nFigure 1: System Design\n\n\n\nThe primary input for this process consists of three free text fields from survey responses: the company’s activity, job title, and job description.\n\nSemantic Search of Relevant SIC Index Candidates\n\nThe first step in the process involves conducting a semantic search for relevant Standard Industrial Classification (SIC) index candidates. This is achieved by embedding of a knowledge base using transformer language model MiniLM. The knowledge base includes a list of activities, each with an assigned SIC code. MiniLM is a smaller, more efficient version of the BERT-based transformer model, designed for tasks that require understanding the semantic meaning of text. It is used to convert the text from the survey response into a form that can be compared with the embeddings of the activities in the knowledge base. The result of this step is a list of potential SIC codes that may be relevant to the response.\n\nLLM Query\n\nThe second step involves querying a general purpose pretrained large language model (Gemini-Pro) to evaluate which, if any, of the SIC code candidates is the best fit for the response. This step leverages the ability of LLMs to understand and generate human-like text. The LLM is presented with the response and the list of potential SIC codes and their description, and it is asked to determine which code should be assigned based on the response. If the decision cannot be confidently made the LLM is instructed to return uncodable status.\nThe output from the LLM is required in such a form that specific fields can be identified and easily analysed:\n\nCodable (Yes/No): This field indicates whether or not the survey response could be assigned a SIC code.\nSIC code: This field contains the SIC code that was determined to be the best fit for the response. The code may be requested at either the 5-digit or 2-digit levels.\nFollow-up question: This field specifies a suitable follow-up question to clarify the response in case that an appropriate SIC code cannot be readily determined.\nSIC candidates (+likelihood estimate): This field lists the SIC codes that were considered as potential matches for the response, along with an estimate of the likelihood that each code is the correct match.\nReasoning: This field provides an explanation of why the LLM selected the particular SIC code or decided that the correct code cannot be determined.\n\nAlterations to the pipeline were considered. For example, instead of providing a short-list of candidates one can take advantage of the ever-increasing context window (input length allowance) and include the full index or use the LLM’s own awareness of SIC index. We found these options yield worse results than the above outlined RAG for this particular task and model used.\nBoth steps rely on pretrained transformer-based models. Because the latest LLMs have been trained on large bodies of text and have billions of parameters they are able to identify the semantic meaning of words, nuance in grammar and spelling. In contrast with rule-based or bag-of-words based machine learning methods this improves how it handles previously unseen responses, such as emerging jobs and industries, unusually phrased or misspelled responses.\nThe use of pretrained models in our pipeline provides a solid foundation, but there is an option to fine-tune these models on a specific task to potentially improve performance. Fine-tuning involves continuing the training of the pretrained model on a new dataset, in this case, the survey responses and SIC codes. However, it tends to be computationally expensive and time-consuming and require large, annotated dataset, which was not available.\nAn alternative approach to the one-shot prompt used in the second step of the pipeline is to use an agent-based method. In this approach, instead of the LLM making a decision based on a single interaction, the LLM acts as an agent that engages in a dialogue with the text data. The LLM, acting as an agent, can be dynamically assigned different roles in the conversation or specialist tasks. However, it therefore requires more computational resources and time, as it involves multiple interactions with the LLM.\nAt this moment we have not evaluated the quality of provided follow-up question and reasoning but included them in the proof of concept due to their potential to improve the data collection step (whether as a one-off qualitative analysis or in real-time process).\nThe codebase includes an example user interface. This allows small-scale testing where users can experiment with different models and test their sensitivity to the input. An example of this working with output is shown in Figure 2\n\n\n\n\n\n\nFigure 2: App User Interface"
-  },
-  {
-    "objectID": "reference/sicDB.SicMeta.html",
-    "href": "reference/sicDB.SicMeta.html",
-    "title": "sicDB.SicMeta",
-    "section": "",
-    "text": "data_models.sicDB.SicMeta(self)\nSIC Meta data model class for SIC codes and their descriptions build based on java dictionary from onsdigital repo.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nsic_meta\nList[ClassificationMeta]\nList of ClassificationMeta objects",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC metadata",
-      "sicDB.SicMeta"
-    ]
-  },
-  {
-    "objectID": "reference/sicDB.SicMeta.html#attributes",
-    "href": "reference/sicDB.SicMeta.html#attributes",
-    "title": "sicDB.SicMeta",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nsic_meta\nList[ClassificationMeta]\nList of ClassificationMeta objects",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC metadata",
-      "sicDB.SicMeta"
-    ]
-  },
-  {
-    "objectID": "reference/prompt.PromptTemplates.html",
-    "href": "reference/prompt.PromptTemplates.html",
-    "title": "prompt.PromptTemplates",
-    "section": "",
-    "text": "prompt.PromptTemplates(self)\nClass to store prompt templates for SOC and SIC classification tasks.\nEach prompt template includes the necessary variables and formatting instructions to generate the prompt. The module also includes the necessary imports and configurations to generate the prompts.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nSOC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SOC codes based on respondent’s data.\n\n\nSIC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data.\n\n\nSIC_PROMPT_RAG\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data, with a relevant subset of SIC codes provided.\n\n\nGENERAL_PROMPT_RAG\nPromptTemplate\nPrompt template for determining custom classification codes based on respondent data, with a relevant subset of codes provided.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "prompt.PromptTemplates"
-    ]
-  },
-  {
-    "objectID": "reference/prompt.PromptTemplates.html#attributes",
-    "href": "reference/prompt.PromptTemplates.html#attributes",
-    "title": "prompt.PromptTemplates",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nSOC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SOC codes based on respondent’s data.\n\n\nSIC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data.\n\n\nSIC_PROMPT_RAG\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data, with a relevant subset of SIC codes provided.\n\n\nGENERAL_PROMPT_RAG\nPromptTemplate\nPrompt template for determining custom classification codes based on respondent data, with a relevant subset of codes provided.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "prompt.PromptTemplates"
-    ]
-  },
-  {
-    "objectID": "reference/index.html",
-    "href": "reference/index.html",
-    "title": "LLM based classification",
-    "section": "",
-    "text": "Large Language Model based classification main handlers.\n\n\n\nembedding.EmbeddingHandler\nHandles embedding operations for the Chroma vector store.\n\n\nllm.ClassificationLLM\nWraps the logic for using an LLM to classify respondent’s data\n\n\nprompt.PromptTemplates\nClass to store prompt templates for SOC and SIC classification tasks.\n\n\n\n\n\n\n\n\nSocCandidate\nRepresents a candidate SOC code based on provided job title and description.\n\n\nSocResponse\nRepresents a response model for SOC code assignment.\n\n\nSicCandidate\nRepresents a candidate SIC code with associated information.\n\n\nSicResponse\nRepresents a response model for SIC code assignment.\n\n\nRagCandidate\nRepresents a candidate classification code with associated information.\n\n\nRagResponse\nRepresents a response model for classification code assignment.\n\n\n\n\n\n\n\nData models to represent Standard Industry Classiffication\n\n\n\nSIC\nMain class for SIC lookups.\n\n\nSicCode\nStandard Industrial Classification code.\n\n\nSicNode\nTree data structure where the nodes hold all data associated with a given SIC.\n\n\n\n\n\n\n\n\nsic_meta_model.ClassificationMeta\nRepresents a classification meta model.\n\n\nsicDB.SicMeta\nSIC Meta data model class for SIC codes and their descriptions\n\n\n\n\n\n\n\nConfig and Log utils\n\n\n\nsetup_logging\nSet up console and file logging.\n\n\nget_config\nFetch the configuration.\n\n\ncheck_file_exists\nCheck if the file exists.",
-    "crumbs": [
-      "Reference",
-      "LLM based classification"
-    ]
-  },
-  {
-    "objectID": "reference/index.html#classification-module",
-    "href": "reference/index.html#classification-module",
-    "title": "LLM based classification",
-    "section": "",
-    "text": "Large Language Model based classification main handlers.\n\n\n\nembedding.EmbeddingHandler\nHandles embedding operations for the Chroma vector store.\n\n\nllm.ClassificationLLM\nWraps the logic for using an LLM to classify respondent’s data\n\n\nprompt.PromptTemplates\nClass to store prompt templates for SOC and SIC classification tasks.\n\n\n\n\n\n\n\n\nSocCandidate\nRepresents a candidate SOC code based on provided job title and description.\n\n\nSocResponse\nRepresents a response model for SOC code assignment.\n\n\nSicCandidate\nRepresents a candidate SIC code with associated information.\n\n\nSicResponse\nRepresents a response model for SIC code assignment.\n\n\nRagCandidate\nRepresents a candidate classification code with associated information.\n\n\nRagResponse\nRepresents a response model for classification code assignment.",
-    "crumbs": [
-      "Reference",
-      "LLM based classification"
-    ]
-  },
-  {
-    "objectID": "reference/index.html#sic-index-abstraction",
-    "href": "reference/index.html#sic-index-abstraction",
-    "title": "LLM based classification",
-    "section": "",
-    "text": "Data models to represent Standard Industry Classiffication\n\n\n\nSIC\nMain class for SIC lookups.\n\n\nSicCode\nStandard Industrial Classification code.\n\n\nSicNode\nTree data structure where the nodes hold all data associated with a given SIC.\n\n\n\n\n\n\n\n\nsic_meta_model.ClassificationMeta\nRepresents a classification meta model.\n\n\nsicDB.SicMeta\nSIC Meta data model class for SIC codes and their descriptions",
-    "crumbs": [
-      "Reference",
-      "LLM based classification"
-    ]
-  },
-  {
-    "objectID": "reference/index.html#helpers",
-    "href": "reference/index.html#helpers",
-    "title": "LLM based classification",
-    "section": "",
-    "text": "Config and Log utils\n\n\n\nsetup_logging\nSet up console and file logging.\n\n\nget_config\nFetch the configuration.\n\n\ncheck_file_exists\nCheck if the file exists.",
-    "crumbs": [
-      "Reference",
-      "LLM based classification"
-    ]
-  },
-  {
-    "objectID": "reference/embedding.EmbeddingHandler.html",
-    "href": "reference/embedding.EmbeddingHandler.html",
-    "title": "embedding.EmbeddingHandler",
-    "section": "",
-    "text": "embedding.EmbeddingHandler(self, embedding_model_name=config['llm']['embedding_model_name'], db_dir=config['llm']['db_dir'], k_matches=20)\nHandles embedding operations for the Chroma vector store.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nembedding_model_name\nstr\nThe name of the embedding model to use. Defaults to the value specified in the configuration file.\nconfig['llm']['embedding_model_name']\n\n\ndb_dir\nstr\nThe directory where the vector store database is located. Defaults to the value specified in the configuration file. If None then the embedding db will be non-persistent.\nconfig['llm']['db_dir']\n\n\nk_matches\nint\nThe number of nearest matches to retrieve. Defaults to 20.\n20\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nembed_index\nEmbeds the index entries into the vector store.\n\n\nsearch_index\nReturns k document chunks with the highest relevance to the query.\n\n\nsearch_index_multi\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\nembedding.EmbeddingHandler.embed_index(from_empty=True, sic=None, file_object=None)\nEmbeds the index entries into the vector store.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nfrom_empty\nbool\nWhether to drop the current vector store content and start fresh.\nTrue\n\n\nsic\nSIC\nThe SIC hierarchy object. If None, the hierarchy is loaded from files specified in the config.\nNone\n\n\nfile_object\nStringIO object\nThe index file as StringIO object. If provided, the file will be read by line and embedded. Each line has expected format of code: description\nNone\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index(query, return_dicts=True)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nstr\nQuestion for which most relevant index entries will be returned.\nrequired\n\n\nreturn_dicts\nbool\nIf True, data returned as list of dictionaries, otherwise as document tuples. Defaults to True.\nTrue\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance.\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index_multi(query)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nlist[str]\nList of query fields (in priority order) for which most relevant index entries will be returned. e.g [industry_descr, job_title, job_descr]\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "embedding.EmbeddingHandler"
-    ]
-  },
-  {
-    "objectID": "reference/embedding.EmbeddingHandler.html#parameters",
-    "href": "reference/embedding.EmbeddingHandler.html#parameters",
-    "title": "embedding.EmbeddingHandler",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nembedding_model_name\nstr\nThe name of the embedding model to use. Defaults to the value specified in the configuration file.\nconfig['llm']['embedding_model_name']\n\n\ndb_dir\nstr\nThe directory where the vector store database is located. Defaults to the value specified in the configuration file. If None then the embedding db will be non-persistent.\nconfig['llm']['db_dir']\n\n\nk_matches\nint\nThe number of nearest matches to retrieve. Defaults to 20.\n20",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "embedding.EmbeddingHandler"
-    ]
-  },
-  {
-    "objectID": "reference/embedding.EmbeddingHandler.html#methods",
-    "href": "reference/embedding.EmbeddingHandler.html#methods",
-    "title": "embedding.EmbeddingHandler",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nembed_index\nEmbeds the index entries into the vector store.\n\n\nsearch_index\nReturns k document chunks with the highest relevance to the query.\n\n\nsearch_index_multi\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\nembedding.EmbeddingHandler.embed_index(from_empty=True, sic=None, file_object=None)\nEmbeds the index entries into the vector store.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nfrom_empty\nbool\nWhether to drop the current vector store content and start fresh.\nTrue\n\n\nsic\nSIC\nThe SIC hierarchy object. If None, the hierarchy is loaded from files specified in the config.\nNone\n\n\nfile_object\nStringIO object\nThe index file as StringIO object. If provided, the file will be read by line and embedded. Each line has expected format of code: description\nNone\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index(query, return_dicts=True)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nstr\nQuestion for which most relevant index entries will be returned.\nrequired\n\n\nreturn_dicts\nbool\nIf True, data returned as list of dictionaries, otherwise as document tuples. Defaults to True.\nTrue\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance.\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index_multi(query)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nlist[str]\nList of query fields (in priority order) for which most relevant index entries will be returned. e.g [industry_descr, job_title, job_descr]\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "embedding.EmbeddingHandler"
-    ]
-  },
-  {
-    "objectID": "reference/SocResponse.html",
-    "href": "reference/SocResponse.html",
-    "title": "SocResponse",
-    "section": "",
-    "text": "data_models.response_model.SocResponse()\nRepresents a response model for SOC code assignment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SOC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask the user in order to collect additional information to enable reliable SOC assignment. Empty if codable=True.\n\n\nsoc_code\nOptional[str]\nFull four-digit SOC code assigned based on provided job title, description, etc. Empty if codable=False.\n\n\nsoc_descriptive\nOptional[str]\nDescriptive label of the SOC category associated with soc_code if provided. Empty if codable=False.\n\n\nsoc_candidates\nList[SocCandidate]\nList of possible or alternative SOC codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsoc_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SOC code assigned. This field should be non-empty if the larger (two-digit) group of SOC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SOC candidates share the same first two digits).\n\n\nreasoning\nstr\nStep by step reasoning behind classification selected. Specifies the information used to assign the SOC code or any additional information required to assign a SOC code.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SocResponse"
-    ]
-  },
-  {
-    "objectID": "reference/SocResponse.html#attributes",
-    "href": "reference/SocResponse.html#attributes",
-    "title": "SocResponse",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SOC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask the user in order to collect additional information to enable reliable SOC assignment. Empty if codable=True.\n\n\nsoc_code\nOptional[str]\nFull four-digit SOC code assigned based on provided job title, description, etc. Empty if codable=False.\n\n\nsoc_descriptive\nOptional[str]\nDescriptive label of the SOC category associated with soc_code if provided. Empty if codable=False.\n\n\nsoc_candidates\nList[SocCandidate]\nList of possible or alternative SOC codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsoc_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SOC code assigned. This field should be non-empty if the larger (two-digit) group of SOC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SOC candidates share the same first two digits).\n\n\nreasoning\nstr\nStep by step reasoning behind classification selected. Specifies the information used to assign the SOC code or any additional information required to assign a SOC code.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SocResponse"
-    ]
-  },
-  {
-    "objectID": "reference/SicResponse.html",
-    "href": "reference/SicResponse.html",
-    "title": "SicResponse",
-    "section": "",
-    "text": "data_models.response_model.SicResponse()\nRepresents a response model for SIC code assignment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SIC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable SIC assignment. Empty if codable=True.\n\n\nsic_code\nOptional[str]\nFull SIC code (to the required number of digits) assigned based on the provided company activity description. Empty if codable=False.\n\n\nsic_descriptive\nOptional[str]\nDescriptive label of the SIC category associated with sic_code if provided. Empty if codable=False.\n\n\nsic_candidates\nList[SicCandidate]\nShort list of less than ten possible or alternative sic codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsic_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SIC code assigned. This field should be non empty if the larger (two-digit) group of SIC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SIC candidates share the same first two digits).\n\n\nreasoning\nstr\nSpecifies the information used to assign the SIC code or any additional information required to assign a SIC code.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SicResponse"
-    ]
-  },
-  {
-    "objectID": "reference/SicResponse.html#attributes",
-    "href": "reference/SicResponse.html#attributes",
-    "title": "SicResponse",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SIC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable SIC assignment. Empty if codable=True.\n\n\nsic_code\nOptional[str]\nFull SIC code (to the required number of digits) assigned based on the provided company activity description. Empty if codable=False.\n\n\nsic_descriptive\nOptional[str]\nDescriptive label of the SIC category associated with sic_code if provided. Empty if codable=False.\n\n\nsic_candidates\nList[SicCandidate]\nShort list of less than ten possible or alternative sic codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsic_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SIC code assigned. This field should be non empty if the larger (two-digit) group of SIC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SIC candidates share the same first two digits).\n\n\nreasoning\nstr\nSpecifies the information used to assign the SIC code or any additional information required to assign a SIC code.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SicResponse"
-    ]
-  },
-  {
-    "objectID": "reference/SicCode.html",
-    "href": "reference/SicCode.html",
-    "title": "SicCode",
-    "section": "",
-    "text": "data_models.sic_hierarchy.SicCode(self, alpha_code)\nStandard Industrial Classification code.\nThe main representation for SIC in this class is the alpha_code, which we define as:\n* The section character e.g. 'A'\n* Followed by the numeric SIC code e.g. \"0111\"\n* Padded with 'x' to six characters\nFor example: “A0111x”\nThe class supports initialisation with section, code and level via the factory method from_section_code_level.\n\n\nSicCode.from_section_code_level(“A”, “0111”, “class”)\n\n\n\nThis class is mainly for internal use, beyond some basic checks of formatting and consistency it does not validate that a code is defined in UK SIC 2007.\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nfrom_section_code_level\nFactory method for SicCode.\n\n\n\n\n\ndata_models.sic_hierarchy.SicCode.from_section_code_level(section, code, level)\nFactory method for SicCode.\n\n\nUsed to produce the definitive list of SIC codes, only call with data that defines SIC.",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SicCode"
-    ]
-  },
-  {
-    "objectID": "reference/SicCode.html#for-example",
-    "href": "reference/SicCode.html#for-example",
-    "title": "SicCode",
-    "section": "",
-    "text": "SicCode.from_section_code_level(“A”, “0111”, “class”)",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SicCode"
-    ]
-  },
-  {
-    "objectID": "reference/SicCode.html#note",
-    "href": "reference/SicCode.html#note",
-    "title": "SicCode",
-    "section": "",
-    "text": "This class is mainly for internal use, beyond some basic checks of formatting and consistency it does not validate that a code is defined in UK SIC 2007.",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SicCode"
-    ]
-  },
-  {
-    "objectID": "reference/SicCode.html#methods",
-    "href": "reference/SicCode.html#methods",
-    "title": "SicCode",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nfrom_section_code_level\nFactory method for SicCode.\n\n\n\n\n\ndata_models.sic_hierarchy.SicCode.from_section_code_level(section, code, level)\nFactory method for SicCode.\n\n\nUsed to produce the definitive list of SIC codes, only call with data that defines SIC.",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SicCode"
-    ]
-  },
-  {
-    "objectID": "reference/SIC.html",
-    "href": "reference/SIC.html",
-    "title": "SIC",
-    "section": "",
-    "text": "data_models.sic_hierarchy.SIC(self, nodes, code_lookup)\nMain class for SIC lookups.\n\n\nsic = load_hierarchy(sic_df, sic_index_df)\nsic[“01.1”]\nsic[“011”]\nsic[“A011xx”]\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nall_leaf_activities\nAll activities for 5-digit SIC.\n\n\nall_leaf_descriptions\nAll descriptions for 5-digit SIC.\n\n\nall_leaf_text\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_activities()\nAll activities for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_descriptions()\nAll descriptions for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_text()\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\nActivities from the SIC index\nDescription from the SIC structure\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\npd.DataFrame\npd.DataFrame Two columns code, text",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC"
-    ]
-  },
-  {
-    "objectID": "reference/SIC.html#usage",
-    "href": "reference/SIC.html#usage",
-    "title": "SIC",
-    "section": "",
-    "text": "sic = load_hierarchy(sic_df, sic_index_df)\nsic[“01.1”]\nsic[“011”]\nsic[“A011xx”]",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC"
-    ]
-  },
-  {
-    "objectID": "reference/SIC.html#methods",
-    "href": "reference/SIC.html#methods",
-    "title": "SIC",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nall_leaf_activities\nAll activities for 5-digit SIC.\n\n\nall_leaf_descriptions\nAll descriptions for 5-digit SIC.\n\n\nall_leaf_text\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_activities()\nAll activities for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_descriptions()\nAll descriptions for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_text()\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\nActivities from the SIC index\nDescription from the SIC structure\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\npd.DataFrame\npd.DataFrame Two columns code, text",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC"
-    ]
-  },
-  {
-    "objectID": "reference/RagCandidate.html",
-    "href": "reference/RagCandidate.html",
-    "title": "RagCandidate",
-    "section": "",
-    "text": "data_models.response_model.RagCandidate()\nRepresents a candidate classification code with associated information.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nclass_code\nstr\nPlausible classification code based on the respondent’s data.\n\n\nclass_descriptive\nstr\nDescriptive label of the classification category associated with class_code.\n\n\nlikelihood\nfloat\nLikelihood of this class_code with a value between 0 and 1.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "RagCandidate"
-    ]
-  },
-  {
-    "objectID": "reference/RagCandidate.html#attributes",
-    "href": "reference/RagCandidate.html#attributes",
-    "title": "RagCandidate",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nclass_code\nstr\nPlausible classification code based on the respondent’s data.\n\n\nclass_descriptive\nstr\nDescriptive label of the classification category associated with class_code.\n\n\nlikelihood\nfloat\nLikelihood of this class_code with a value between 0 and 1.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "RagCandidate"
-    ]
-  },
-  {
-    "objectID": "reference/RagResponse.html",
-    "href": "reference/RagResponse.html",
-    "title": "RagResponse",
-    "section": "",
-    "text": "data_models.response_model.RagResponse()\nRepresents a response model for classification code assignment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide classification code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable classification assignment. Empty if codable=True.\n\n\nclass_code\nOptional[str]\nFull classification code (to the required number of digits) assigned based on provided respondent’s data. Empty if codable=False.\n\n\nclass_descriptive\nOptional[str]\nDescriptive label of the classification category associated with class_code if provided. Empty if codable=False.\n\n\nalt_candidates\nList[RagCandidate]\nShort list of less than ten possible or alternative classification codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nreasoning\nstr\nStep by step reasoning behind the classification selected. Specifies the information used to assign the SIC code or any additional information required to assign a SIC code.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "RagResponse"
-    ]
-  },
-  {
-    "objectID": "reference/RagResponse.html#attributes",
-    "href": "reference/RagResponse.html#attributes",
-    "title": "RagResponse",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide classification code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable classification assignment. Empty if codable=True.\n\n\nclass_code\nOptional[str]\nFull classification code (to the required number of digits) assigned based on provided respondent’s data. Empty if codable=False.\n\n\nclass_descriptive\nOptional[str]\nDescriptive label of the classification category associated with class_code if provided. Empty if codable=False.\n\n\nalt_candidates\nList[RagCandidate]\nShort list of less than ten possible or alternative classification codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nreasoning\nstr\nStep by step reasoning behind the classification selected. Specifies the information used to assign the SIC code or any additional information required to assign a SIC code.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "RagResponse"
-    ]
-  },
-  {
-    "objectID": "reference/SicCandidate.html",
-    "href": "reference/SicCandidate.html",
-    "title": "SicCandidate",
-    "section": "",
-    "text": "data_models.response_model.SicCandidate()\nRepresents a candidate SIC code with associated information.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nsic_code\nstr\nPlausible SIC code based on the company activity description.\n\n\nsic_descriptive\nstr\nDescriptive label of the SIC category associated with sic_code.\n\n\nlikelihood\nfloat\nLikelihood of this sic_code with a value between 0 and 1.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SicCandidate"
-    ]
-  },
-  {
-    "objectID": "reference/SicCandidate.html#attributes",
-    "href": "reference/SicCandidate.html#attributes",
-    "title": "SicCandidate",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nsic_code\nstr\nPlausible SIC code based on the company activity description.\n\n\nsic_descriptive\nstr\nDescriptive label of the SIC category associated with sic_code.\n\n\nlikelihood\nfloat\nLikelihood of this sic_code with a value between 0 and 1.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SicCandidate"
-    ]
-  },
-  {
-    "objectID": "reference/SicNode.html",
-    "href": "reference/SicNode.html",
-    "title": "SicNode",
-    "section": "",
-    "text": "data_models.sic_hierarchy.SicNode(self, sic_code, description)\nTree data structure where the nodes hold all data associated with a given SIC.\nThe SIC hierarchy is represented as several separate trees, with each section (e.g. “A”, “B”, “C”) as a root node.\n\n\n\n\n\nName\nDescription\n\n\n\n\nprint_all\nPrints all information about the SIC hierarchy.\n\n\n\n\n\ndata_models.sic_hierarchy.SicNode.print_all()\nPrints all information about the SIC hierarchy.\n\n\n\nThe string representation of the SIC hierarchy.\nThe section of the SIC code.\nThe parent of the current SIC hierarchy.\nThe children of the current SIC hierarchy.\nThe detail, includes, and excludes attributes of the SIC meta.\nThe activities associated with the SIC hierarchy.",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SicNode"
-    ]
-  },
-  {
-    "objectID": "reference/SicNode.html#methods",
-    "href": "reference/SicNode.html#methods",
-    "title": "SicNode",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nprint_all\nPrints all information about the SIC hierarchy.\n\n\n\n\n\ndata_models.sic_hierarchy.SicNode.print_all()\nPrints all information about the SIC hierarchy.\n\n\n\nThe string representation of the SIC hierarchy.\nThe section of the SIC code.\nThe parent of the current SIC hierarchy.\nThe children of the current SIC hierarchy.\nThe detail, includes, and excludes attributes of the SIC meta.\nThe activities associated with the SIC hierarchy.",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SicNode"
-    ]
-  },
-  {
-    "objectID": "reference/SocCandidate.html",
-    "href": "reference/SocCandidate.html",
-    "title": "SocCandidate",
-    "section": "",
-    "text": "data_models.response_model.SocCandidate()\nRepresents a candidate SOC code based on provided job title and description.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nsoc_code\nstr\nPlausible SOC code based on the provided job title and description.\n\n\nsoc_descriptive\nstr\nDescriptive label of the SOC category associated with soc_code.\n\n\nlikelihood\nfloat\nLikelihood of this soc_code with a value between 0 and 1.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SocCandidate"
-    ]
-  },
-  {
-    "objectID": "reference/SocCandidate.html#attributes",
-    "href": "reference/SocCandidate.html#attributes",
-    "title": "SocCandidate",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\nsoc_code\nstr\nPlausible SOC code based on the provided job title and description.\n\n\nsoc_descriptive\nstr\nDescriptive label of the SOC category associated with soc_code.\n\n\nlikelihood\nfloat\nLikelihood of this soc_code with a value between 0 and 1.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "Response models",
-      "SocCandidate"
-    ]
-  },
-  {
-    "objectID": "reference/check_file_exists.html",
-    "href": "reference/check_file_exists.html",
-    "title": "check_file_exists",
-    "section": "",
-    "text": "check_file_exists(file_name='sic_soc_llm_config.toml')\nCheck if the file exists.\nIf relative path provided it will look for the file in these locations: 1. relative to the current working directory 2. ralative to project root directory 3. relative to user’s home directory 4. relative to the package resources\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nfile_name\nPath or str\nThe name of the file to check. Defaults to config file name.\n'sic_soc_llm_config.toml'\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nPath\nThe absolute path to the file if it exists, None otherwise.",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "check_file_exists"
-    ]
-  },
-  {
-    "objectID": "reference/check_file_exists.html#parameters",
-    "href": "reference/check_file_exists.html#parameters",
-    "title": "check_file_exists",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nfile_name\nPath or str\nThe name of the file to check. Defaults to config file name.\n'sic_soc_llm_config.toml'",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "check_file_exists"
-    ]
-  },
-  {
-    "objectID": "reference/check_file_exists.html#returns",
-    "href": "reference/check_file_exists.html#returns",
-    "title": "check_file_exists",
-    "section": "",
-    "text": "Type\nDescription\n\n\n\n\nPath\nThe absolute path to the file if it exists, None otherwise.",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "check_file_exists"
-    ]
-  },
-  {
-    "objectID": "reference/get_config.html",
-    "href": "reference/get_config.html",
-    "title": "get_config",
-    "section": "",
-    "text": "get_config(config_name='sic_soc_llm_config.toml')\nFetch the configuration.\nLoads config from the filepath defined in CONFIG_FILEPATH.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nconfig_name\nPath or str\nThe name of the config file to load. Defaults to relative path “sic_soc_llm_config.toml” - in such case it looks for the config file in 1. current dir, 2. project dir, 3. user home and 4. package resources.\n'sic_soc_llm_config.toml'\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\ndict\nConfiguration for the system.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nFileNotFoundError\nIf the config file or required lookups not found.",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "get_config"
-    ]
-  },
-  {
-    "objectID": "reference/get_config.html#parameters",
-    "href": "reference/get_config.html#parameters",
-    "title": "get_config",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nconfig_name\nPath or str\nThe name of the config file to load. Defaults to relative path “sic_soc_llm_config.toml” - in such case it looks for the config file in 1. current dir, 2. project dir, 3. user home and 4. package resources.\n'sic_soc_llm_config.toml'",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "get_config"
-    ]
-  },
-  {
-    "objectID": "reference/get_config.html#returns",
-    "href": "reference/get_config.html#returns",
-    "title": "get_config",
-    "section": "",
-    "text": "Type\nDescription\n\n\n\n\ndict\nConfiguration for the system.",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "get_config"
-    ]
-  },
-  {
-    "objectID": "reference/get_config.html#raises",
-    "href": "reference/get_config.html#raises",
-    "title": "get_config",
-    "section": "",
-    "text": "Type\nDescription\n\n\n\n\nFileNotFoundError\nIf the config file or required lookups not found.",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "get_config"
-    ]
-  },
-  {
-    "objectID": "reference/llm.ClassificationLLM.html",
-    "href": "reference/llm.ClassificationLLM.html",
-    "title": "llm.ClassificationLLM",
-    "section": "",
-    "text": "llm.ClassificationLLM(self, model_name=config['llm']['llm_model_name'], llm=None, embedding_handler=None, max_tokens=1600, temperature=0.0, verbose=False, openai_api_key=None)\nWraps the logic for using an LLM to classify respondent’s data based on provided index. Includes direct (one-shot) generative llm method and Retrieval Augmented Generation (RAG).\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nmodel_name\nstr\nName of the model. Defaults to the value in the config file. Used if no LLM object is passed.\nconfig['llm']['llm_model_name']\n\n\nllm\nLLM\nLLM to use. Optional.\nNone\n\n\nembedding_handler\nEmbeddingHandler\nEmbedding handler. Optional. If None a default embedding handler is retrieved based on config file.\nNone\n\n\nmax_tokens\nint\nMaximum number of tokens to generate. Defaults to 1600.\n1600\n\n\ntemperature\nfloat\nTemperature of the LLM model. Defaults to 0.0.\n0.0\n\n\nverbose\nbool\nWhether to print verbose output. Defaults to False.\nFalse\n\n\nopenai_api_key\nstr\nOpenAI API key. Optional, but needed for OpenAI models.\nNone\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nget_sic_code\nGenerates a SIC classification based on respondent’s data\n\n\nget_soc_code\nGenerates a SOC classification based on respondent’s data\n\n\nrag_general_code\nGenerates a classification answer based on respondent’s data\n\n\nrag_sic_code\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\nllm.ClassificationLLM.get_sic_code(industry_descr, job_title, job_description)\nGenerates a SIC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nDescription of the industry.\nrequired\n\n\njob_title\nstr\nTitle of the job.\nrequired\n\n\njob_description\nstr\nDescription of the job.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nGenerated response to the query.\n\n\n\n\n\n\n\nllm.ClassificationLLM.get_soc_code(job_title, job_description, level_of_education, manage_others, industry_descr)\nGenerates a SOC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\njob_title\nstr\nThe title of the job.\nrequired\n\n\njob_description\nstr\nThe description of the job.\nrequired\n\n\nlevel_of_education\nstr\nThe level of education required for the job.\nrequired\n\n\nmanage_others\nbool\nIndicates whether the job involves managing others.\nrequired\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSocResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error parsing the response from the LLM model.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_general_code(respondent_data, candidates_limit=7)\nGenerates a classification answer based on respondent’s data using RAG and custom index.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nrespondent_data\ndict\nA dictionary containing respondent data.\nrequired\n\n\ncandidates_limit\nint\nThe maximum number of candidate codes to consider. Defaults to 7.\n7\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nRagResponse\nThe generated classification response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_sic_code(industry_descr, job_title=None, job_description=None, expand_search_terms=True, code_digits=5, candidates_limit=5)\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\njob_title\nstr\nThe job title. Defaults to None.\nNone\n\n\njob_description\nstr\nThe job description. Defaults to None.\nNone\n\n\nexpand_search_terms\nbool\nWhether to expand the search terms to include job title and description. Defaults to True.\nTrue\n\n\ncode_digits\nint\nThe number of digits in the generated SIC code. Defaults to 5.\n5\n\n\ncandidates_limit\nint\nThe maximum number of SIC code candidates to consider. Defaults to 5.\n5\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "llm.ClassificationLLM"
-    ]
-  },
-  {
-    "objectID": "reference/llm.ClassificationLLM.html#parameters",
-    "href": "reference/llm.ClassificationLLM.html#parameters",
-    "title": "llm.ClassificationLLM",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nmodel_name\nstr\nName of the model. Defaults to the value in the config file. Used if no LLM object is passed.\nconfig['llm']['llm_model_name']\n\n\nllm\nLLM\nLLM to use. Optional.\nNone\n\n\nembedding_handler\nEmbeddingHandler\nEmbedding handler. Optional. If None a default embedding handler is retrieved based on config file.\nNone\n\n\nmax_tokens\nint\nMaximum number of tokens to generate. Defaults to 1600.\n1600\n\n\ntemperature\nfloat\nTemperature of the LLM model. Defaults to 0.0.\n0.0\n\n\nverbose\nbool\nWhether to print verbose output. Defaults to False.\nFalse\n\n\nopenai_api_key\nstr\nOpenAI API key. Optional, but needed for OpenAI models.\nNone",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "llm.ClassificationLLM"
-    ]
-  },
-  {
-    "objectID": "reference/llm.ClassificationLLM.html#methods",
-    "href": "reference/llm.ClassificationLLM.html#methods",
-    "title": "llm.ClassificationLLM",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\nget_sic_code\nGenerates a SIC classification based on respondent’s data\n\n\nget_soc_code\nGenerates a SOC classification based on respondent’s data\n\n\nrag_general_code\nGenerates a classification answer based on respondent’s data\n\n\nrag_sic_code\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\nllm.ClassificationLLM.get_sic_code(industry_descr, job_title, job_description)\nGenerates a SIC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nDescription of the industry.\nrequired\n\n\njob_title\nstr\nTitle of the job.\nrequired\n\n\njob_description\nstr\nDescription of the job.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nGenerated response to the query.\n\n\n\n\n\n\n\nllm.ClassificationLLM.get_soc_code(job_title, job_description, level_of_education, manage_others, industry_descr)\nGenerates a SOC classification based on respondent’s data using a whole condensed index embedded in the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\njob_title\nstr\nThe title of the job.\nrequired\n\n\njob_description\nstr\nThe description of the job.\nrequired\n\n\nlevel_of_education\nstr\nThe level of education required for the job.\nrequired\n\n\nmanage_others\nbool\nIndicates whether the job involves managing others.\nrequired\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSocResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error parsing the response from the LLM model.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_general_code(respondent_data, candidates_limit=7)\nGenerates a classification answer based on respondent’s data using RAG and custom index.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nrespondent_data\ndict\nA dictionary containing respondent data.\nrequired\n\n\ncandidates_limit\nint\nThe maximum number of candidate codes to consider. Defaults to 7.\n7\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nRagResponse\nThe generated classification response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly.\n\n\n\n\n\n\n\nllm.ClassificationLLM.rag_sic_code(industry_descr, job_title=None, job_description=None, expand_search_terms=True, code_digits=5, candidates_limit=5)\nGenerates a SIC classification based on respondent’s data using RAG approach.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nindustry_descr\nstr\nThe description of the industry.\nrequired\n\n\njob_title\nstr\nThe job title. Defaults to None.\nNone\n\n\njob_description\nstr\nThe job description. Defaults to None.\nNone\n\n\nexpand_search_terms\nbool\nWhether to expand the search terms to include job title and description. Defaults to True.\nTrue\n\n\ncode_digits\nint\nThe number of digits in the generated SIC code. Defaults to 5.\n5\n\n\ncandidates_limit\nint\nThe maximum number of SIC code candidates to consider. Defaults to 5.\n5\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nSicResponse\nThe generated response to the query.\n\n\n\n\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nValueError\nIf there is an error during the parsing of the response.\n\n\nValueError\nIf the default embedding handler is required but not loaded correctly.",
-    "crumbs": [
-      "Reference",
-      "Classification module",
-      "llm.ClassificationLLM"
-    ]
-  },
-  {
-    "objectID": "reference/setup_logging.html",
-    "href": "reference/setup_logging.html",
-    "title": "setup_logging",
-    "section": "",
-    "text": "setup_logging(script_name=None, log_dir=LOG_DIR)\nSet up console and file logging.\nThis will create a directory to log to if it doesn’t already exist.\nSafe to call in interactive environments without duplicating the logging.\nLogs on the same day will append to the same file for the same script_name.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nscript_name\nstr\nUsed in the filename for the logs.\nNone\n\n\nlog_dir\nPath or str\nDirectory to store logs in. Defaults to “~/logs”.\nLOG_DIR\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlogging.Logger\nLogger object with handlers set up.",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "setup_logging"
-    ]
-  },
-  {
-    "objectID": "reference/setup_logging.html#parameters",
-    "href": "reference/setup_logging.html#parameters",
-    "title": "setup_logging",
-    "section": "",
-    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nscript_name\nstr\nUsed in the filename for the logs.\nNone\n\n\nlog_dir\nPath or str\nDirectory to store logs in. Defaults to “~/logs”.\nLOG_DIR",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "setup_logging"
-    ]
-  },
-  {
-    "objectID": "reference/setup_logging.html#returns",
-    "href": "reference/setup_logging.html#returns",
-    "title": "setup_logging",
-    "section": "",
-    "text": "Type\nDescription\n\n\n\n\nlogging.Logger\nLogger object with handlers set up.",
-    "crumbs": [
-      "Reference",
-      "Helpers",
-      "setup_logging"
-    ]
-  },
-  {
-    "objectID": "reference/sic_meta_model.ClassificationMeta.html",
-    "href": "reference/sic_meta_model.ClassificationMeta.html",
-    "title": "sic_meta_model.ClassificationMeta",
-    "section": "",
-    "text": "data_models.sic_meta_model.ClassificationMeta()\nRepresents a classification meta model.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncode\nstr\nCategory code. Either a full code or a partial code for a larger hierarchical group. Partial code has last digits replaced by ‘x’.\n\n\ntitle\nstr\nShort descriptive title of the code category.\n\n\ndetail\nstr\nDescriptive label of the category associated with the code.\n\n\nincludes\nList[str]\nOptional list of titles that should be included in this category.\n\n\nexcludes\nList[str]\nOptional list of titles that should be excluded from this category.\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\ncheck_code_match\nCheck for partial match of the code.\n\n\npretty_print\nPrints nicely the present fields.\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.check_code_match(subcode)\nCheck for partial match of the code. Discards 1st letter on SIC and then check only valid numbers.\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nsubcode\nstr\n2-5 digits code for matching\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nbool\nif partial match found\n\n\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.pretty_print(subset_digits=[4, 2])\nPrints nicely the present fields.\n\n\n\n\n\nType\nDescription\n\n\n\n\nstr\ndescription",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC metadata",
-      "sic_meta_model.ClassificationMeta"
-    ]
-  },
-  {
-    "objectID": "reference/sic_meta_model.ClassificationMeta.html#attributes",
-    "href": "reference/sic_meta_model.ClassificationMeta.html#attributes",
-    "title": "sic_meta_model.ClassificationMeta",
-    "section": "",
-    "text": "Name\nType\nDescription\n\n\n\n\ncode\nstr\nCategory code. Either a full code or a partial code for a larger hierarchical group. Partial code has last digits replaced by ‘x’.\n\n\ntitle\nstr\nShort descriptive title of the code category.\n\n\ndetail\nstr\nDescriptive label of the category associated with the code.\n\n\nincludes\nList[str]\nOptional list of titles that should be included in this category.\n\n\nexcludes\nList[str]\nOptional list of titles that should be excluded from this category.",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC metadata",
-      "sic_meta_model.ClassificationMeta"
-    ]
-  },
-  {
-    "objectID": "reference/sic_meta_model.ClassificationMeta.html#methods",
-    "href": "reference/sic_meta_model.ClassificationMeta.html#methods",
-    "title": "sic_meta_model.ClassificationMeta",
-    "section": "",
-    "text": "Name\nDescription\n\n\n\n\ncheck_code_match\nCheck for partial match of the code.\n\n\npretty_print\nPrints nicely the present fields.\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.check_code_match(subcode)\nCheck for partial match of the code. Discards 1st letter on SIC and then check only valid numbers.\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nsubcode\nstr\n2-5 digits code for matching\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nbool\nif partial match found\n\n\n\n\n\n\n\ndata_models.sic_meta_model.ClassificationMeta.pretty_print(subset_digits=[4, 2])\nPrints nicely the present fields.\n\n\n\n\n\nType\nDescription\n\n\n\n\nstr\ndescription",
-    "crumbs": [
-      "Reference",
-      "SIC Index Abstraction",
-      "SIC metadata",
-      "sic_meta_model.ClassificationMeta"
-    ]
-  },
-  {
-    "objectID": "tutorials/index.html",
-    "href": "tutorials/index.html",
-    "title": "Tutorials",
-    "section": "",
-    "text": "These tutorials walk you through some of the essential workflows for sic-soc-llm.\n\n\n\n\n\n\n\n\n\n\nTitle\n\n\nDescription\n\n\nReading Time\n\n\n\n\n\n\n1. SIC data structure\n\n\n\n\n\n2 min\n\n\n\n\n2. SIC classifier\n\n\n\n\n\n6 min\n\n\n\n\n3. SOC classifier\n\n\n\n\n\n5 min\n\n\n\n\n4. Custom (COICOP) classifier\n\n\n\n\n\n4 min\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "tutorials/3_soc_classifier.html",
-    "href": "tutorials/3_soc_classifier.html",
-    "title": "3. SOC classifier",
-    "section": "",
-    "text": "Demonstration notebook for the ClassificationLLM with Standard Occupational Classification (SOC) codes.\nCode: Import methods and initialise\nfrom sic_soc_llm import setup_logging\nfrom sic_soc_llm.llm import ClassificationLLM\n\nlogger = setup_logging(\"soc_classifier\")\nThe example SOC classifier uses a one-shot prompt to classify respondent’s data. In particular, there is no retrieval step (to reduce the list of candidate codes) and the whole condensed index is included in the prompt. Note that the soc_demo_llm should be replaced with the LLM of your choice.\nCode: Initialise the SOC classifier\nsoc_llm = ClassificationLLM(llm=soc_demo_llm)"
-  },
-  {
-    "objectID": "tutorials/3_soc_classifier.html#example-soc-classifications",
-    "href": "tutorials/3_soc_classifier.html#example-soc-classifications",
-    "title": "3. SOC classifier",
-    "section": "Example SOC classifications",
-    "text": "Example SOC classifications\nLoad a few examples of possible survey responses and classify them using the SOC classifier.\n\n\nCode: Input and classify examples\nsoc_examples = [\n    {\n        \"job_title\": \"barman\",\n        \"job_description\": \"barman at local golf club\",\n        \"employer_activities\": \"golf club\",\n    },\n    {\n        \"job_title\": \"hotel night manager\",\n        \"job_description\": \"\"\"hight potter reception closing documents\n            breakfast preparation\"\"\",\n        \"employer_activities\": \"hotel\",\n    },\n    {\n        \"job_title\": \"functional consultant\",\n        \"job_description\": \"provide cnsultancy on system configuration\",\n        \"employer_activities\": \"technology provide deliver enterprise software\",\n    },\n    {\n        \"job_title\": \"senior airport services agent\",\n        \"job_description\": \"customer service\",\n        \"employer_activities\": \"airline\",\n    },\n    {\n        \"job_title\": \"PEIRIANYDD\",\n        \"job_description\": \"TRWSHIO\",\n        \"employer_activities\": \"TRIN PERIANAU\",\n    },\n]\n\nfor item in soc_examples:\n    # Get response from LLM\n    response = soc_llm.get_soc_code(\n            item[\"job_title\"],\n            item[\"job_description\"],\n            level_of_education=\"Unknown\",\n            manage_others=\"Unknown\",\n            industry_descr=item[\"employer_activities\"],\n        )\n\n    # Print the output\n    print(\"Input:\")\n    for v, w in item.items():\n        print(f\"  {v}: {w}\")\n    print('')\n\n    print(\"Response:\")\n    for x,y  in response.__dict__.items():\n        print (f\"  {x}: {y}\")\n    print(\"\")\n    print('===========================================')\n    print(\"\")\n\n\nInput:\n  job_title: barman\n  job_description: barman at local golf club\n  employer_activities: golf club\n\nResponse:\n  codable: True\n  followup: None\n  soc_code: 9265\n  soc_descriptive: Bar staff\n  soc_candidates: [SocCandidate(soc_code='9265', soc_descriptive='Bar staff', likelihood=1.0)]\n  soc_code_2digits: 92\n  reasoning: The job title 'barman' and the job description 'barman at local golf club' clearly indicate that the respondent's job involves serving drinks at a bar, which aligns with the SOC code 9265 for 'Bar staff'.\n\n===========================================\n\nInput:\n  job_title: hotel night manager\n  job_description: hight potter reception closing documents\n            breakfast preparation\n  employer_activities: hotel\n\nResponse:\n  codable: True\n  followup: None\n  soc_code: 1221\n  soc_descriptive: Hotel and accommodation managers and proprietors\n  soc_candidates: [SocCandidate(soc_code='1221', soc_descriptive='Hotel and accommodation managers and proprietors', likelihood=1.0)]\n  soc_code_2digits: 12\n  reasoning: The job title 'hotel night manager' and the company's main activity being a hotel aligns with the SOC code 1221 for 'Hotel and accommodation managers and proprietors'. The job description, although unclear, seems to involve duties that could be associated with this role.\n\n===========================================\n\nInput:\n  job_title: functional consultant\n  job_description: provide cnsultancy on system configuration\n  employer_activities: technology provide deliver enterprise software\n\nResponse:\n  codable: False\n  followup: Could you please provide more details about your daily tasks and responsibilities in this role?\n  soc_code: None\n  soc_descriptive: None\n  soc_candidates: [SocCandidate(soc_code='2139', soc_descriptive='Information technology professionals n.e.c.', likelihood=0.7)]\n  soc_code_2digits: 21\n  reasoning: The job title 'functional consultant' and the job description 'provide consultancy on system configuration' suggest a role in IT consultancy. However, more specific information about the tasks and responsibilities of the role is needed to assign a more accurate SOC code.\n\n===========================================\n\nInput:\n  job_title: senior airport services agent\n  job_description: customer service\n  employer_activities: airline\n\nResponse:\n  codable: True\n  followup: None\n  soc_code: 6213\n  soc_descriptive: Air travel assistants\n  soc_candidates: [SocCandidate(soc_code='6213', soc_descriptive='Air travel assistants', likelihood=0.9)]\n  soc_code_2digits: 62\n  reasoning: The job title 'senior airport services agent' and the job description 'customer service' in the context of an airline company suggest that the respondent's role involves assisting passengers and providing customer service in an airport setting. This aligns with the SOC code 6213 for 'Air travel assistants'.\n\n===========================================\n\nInput:\n  job_title: PEIRIANYDD\n  job_description: TRWSHIO\n  employer_activities: TRIN PERIANAU\n\nResponse:\n  codable: False\n  followup: Could you please provide more specific information about your job responsibilities and the nature of the materials you work with?\n  soc_code: None\n  soc_descriptive: None\n  soc_candidates: [SocCandidate(soc_code='2125', soc_descriptive='Production and Process Engineers', likelihood=0.5), SocCandidate(soc_code='2122', soc_descriptive='Mechanical Engineers', likelihood=0.5)]\n  soc_code_2digits: 21\n  reasoning: The job title translates to 'Engineer' and the company's main activity involves 'Processing Materials'. This could correspond to several engineering roles within the '21' SOC code category, but without more specific information, it is not possible to determine the exact SOC code.\n\n==========================================="
+    "text": "RAG based classification\nThe proposed LLM-based method for auto coding of free text survey responses involves two main steps. Our implementation follows the common Retrieval Augmented Generation (RAG) design, for overview see Figure 1.\n\n\n\nFigure 1: System Design\n\n\nThe primary input for this process consists of three free text fields from survey responses: the company’s activity, job title, and job description.\n\nSemantic Search of Relevant SIC Index Candidates\n\nThe first step in the process involves conducting a semantic search for relevant Standard Industrial Classification (SIC) index candidates. This is achieved by embedding of a knowledge base using transformer language model MiniLM. The knowledge base includes a list of activities, each with an assigned SIC code. MiniLM is a smaller, more efficient version of the BERT-based transformer model, designed for tasks that require understanding the semantic meaning of text. It is used to convert the text from the survey response into a form that can be compared with the embeddings of the activities in the knowledge base. The result of this step is a list of potential SIC codes that may be relevant to the response.\n\nLLM Query\n\nThe second step involves querying a general purpose pretrained large language model (Gemini-Pro) to evaluate which, if any, of the SIC code candidates is the best fit for the response. This step leverages the ability of LLMs to understand and generate human-like text. The LLM is presented with the response and the list of potential SIC codes and their description, and it is asked to determine which code should be assigned based on the response. If the decision cannot be confidently made the LLM is instructed to return uncodable status.\nThe output from the LLM is required in such a form that specific fields can be identified and easily analysed:\n\nCodable (Yes/No): This field indicates whether or not the survey response could be assigned a SIC code.\nSIC code: This field contains the SIC code that was determined to be the best fit for the response. The code may be requested at either the 5-digit or 2-digit levels.\nFollow-up question: This field specifies a suitable follow-up question to clarify the response in case that an appropriate SIC code cannot be readily determined.\nSIC candidates (+likelihood estimate): This field lists the SIC codes that were considered as potential matches for the response, along with an estimate of the likelihood that each code is the correct match.\nReasoning: This field provides an explanation of why the LLM selected the particular SIC code or decided that the correct code cannot be determined.\n\nAlterations to the pipeline were considered. For example, instead of providing a short-list of candidates one can take advantage of the ever-increasing context window (input length allowance) and include the full index or use the LLM’s own awareness of SIC index. We found these options yield worse results than the above outlined RAG for this particular task and model used.\nBoth steps rely on pretrained transformer-based models. Because the latest LLMs have been trained on large bodies of text and have billions of parameters they are able to identify the semantic meaning of words, nuance in grammar and spelling. In contrast with rule-based or bag-of-words based machine learning methods this improves how it handles previously unseen responses, such as emerging jobs and industries, unusually phrased or misspelled responses.\nThe use of pretrained models in our pipeline provides a solid foundation, but there is an option to fine-tune these models on a specific task to potentially improve performance. Fine-tuning involves continuing the training of the pretrained model on a new dataset, in this case, the survey responses and SIC codes. However, it tends to be computationally expensive and time-consuming and require large, annotated dataset, which was not available.\nAn alternative approach to the one-shot prompt used in the second step of the pipeline is to use an agent-based method. In this approach, instead of the LLM making a decision based on a single interaction, the LLM acts as an agent that engages in a dialogue with the text data. The LLM, acting as an agent, can be dynamically assigned different roles in the conversation or specialist tasks. However, it therefore requires more computational resources and time, as it involves multiple interactions with the LLM.\nAt this moment we have not evaluated the quality of provided follow-up question and reasoning but included them in the proof of concept due to their potential to improve the data collection step (whether as a one-off qualitative analysis or in real-time process).\nThe codebase includes an example user interface. This allows small-scale testing where users can experiment with different models and test their sensitivity to the input. An example of this working with output is shown in Figure 2\n\n\n\nFigure 2: App User Interface"
   },
   {
     "objectID": "tutorials/2_sic_classifier.html",
@@ -762,5 +313,194 @@
     "title": "2. SIC classifier",
     "section": "Example SIC classification",
     "text": "Example SIC classification\nLoad a few examples of possible survey responses and classify them using the SIC classifier.\n\n\nCode: Input and classify examples\nsic_examples = [\n    {\n        \"industry_descr\": \"we provide care to thousands of patients across north east lincolnshire\",\n        \"job_title\": \"anaesthetist\",\n        \"job_description\": \"give anaesthetics for surgical, medical and psychiatric procedures\"\n    },\n    {\n        \"industry_descr\": \"we catch fish on the north sea from grimsby port\",\n        \"job_title\": None,\n        \"job_description\": None\n    },\n    {\n        \"industry_descr\": \"bitcoin trading\",\n        \"job_title\": None,\n        \"job_description\": None\n\n    },\n    {\n        \"industry_descr\": \"we match tutors to pupils for extra help outside of school\",\n        \"job_title\": None,\n        \"job_description\": \"help gcse and a level students achieve the best possible results\"\n    },\n]\n\nfor item in sic_examples:\n    # Get response from LLM\n    response, short_list, call_dict = sic_llm.rag_sic_code(\n            industry_descr = item[\"industry_descr\"],\n            job_title = item[\"job_title\"],\n            job_description = item[\"job_description\"],\n        )\n\n    # Print the output\n    print(\"Input:\")\n    for v, w in item.items():\n        print(f\"  {v}: {w}\")\n    print('')\n\n    print(\"Response:\")\n    for x,y  in response.__dict__.items():\n        print (f\"  {x}: {y}\")\n    print(\"\")\n    print('===========================================')\n    print(\"\")\n\n\nInput:\n  industry_descr: we provide care to thousands of patients across north east lincolnshire\n  job_title: anaesthetist\n  job_description: give anaesthetics for surgical, medical and psychiatric procedures\n\nResponse:\n  codable: True\n  followup: None\n  sic_code: 86101\n  sic_descriptive: Hospital activities\n  sic_candidates: [SicCandidate(sic_code='86101', sic_descriptive='Hospital activities', likelihood=0.9), SicCandidate(sic_code='86220', sic_descriptive='Specialist medical practice activities', likelihood=0.1)]\n  reasoning: The company's main activity is providing care to patients, which aligns with the 'Hospital activities' SIC code. The job title and description also suggest a hospital setting. However, there is a small possibility that the company could fall under 'Specialist medical practice activities' as the job title is a specialist role.\n\n===========================================\n\nInput:\n  industry_descr: we catch fish on the north sea from grimsby port\n  job_title: None\n  job_description: None\n\nResponse:\n  codable: True\n  followup: None\n  sic_code: 03110\n  sic_descriptive: Marine fishing\n  sic_candidates: [SicCandidate(sic_code='03110', sic_descriptive='Marine fishing', likelihood=1.0)]\n  reasoning: The company's main activity is described as 'catching fish on the north sea from grimsby port', which aligns with the 'Marine fishing' category under SIC code 03110.\n\n===========================================\n\nInput:\n  industry_descr: bitcoin trading\n  job_title: None\n  job_description: None\n\nResponse:\n  codable: True\n  followup: None\n  sic_code: 66190\n  sic_descriptive: Other activities auxiliary to financial services, except insurance and pension funding\n  sic_candidates: [SicCandidate(sic_code='66190', sic_descriptive='Other activities auxiliary to financial services, except insurance and pension funding', likelihood=0.7), SicCandidate(sic_code='64191', sic_descriptive='Banks', likelihood=0.2), SicCandidate(sic_code='64991', sic_descriptive='Security dealing on own account', likelihood=0.1)]\n  reasoning: The company's main activity is bitcoin trading, which falls under 'Other activities auxiliary to financial services, except insurance and pension funding'. However, it could also potentially fall under 'Banks' or 'Security dealing on own account', but these are less likely.\n\n===========================================\n\nInput:\n  industry_descr: we match tutors to pupils for extra help outside of school\n  job_title: None\n  job_description: help gcse and a level students achieve the best possible results\n\nResponse:\n  codable: True\n  followup: None\n  sic_code: 85590\n  sic_descriptive: Other education nec\n  sic_candidates: [SicCandidate(sic_code='85590', sic_descriptive='Other education nec', likelihood=0.9), SicCandidate(sic_code='85600', sic_descriptive='Educational support activities', likelihood=0.1)]\n  reasoning: The company's main activity of matching tutors to pupils for extra help outside of school aligns with the 'Other education nec' category (SIC code 85590). The job description of helping GCSE and A level students achieve the best possible results further supports this classification. The 'Educational support activities' category (SIC code 85600) could also be a possibility, but is less likely given the specific tutoring focus of the company.\n\n==========================================="
+  },
+  {
+    "objectID": "tutorials/4_custom_coicop_classifier.html",
+    "href": "tutorials/4_custom_coicop_classifier.html",
+    "title": "4. Custom (COICOP) classifier",
+    "section": "",
+    "text": "Demonstration notebook for the ClassificationLLM using RAG with a custom index. In this demo, the Classification of Individual Consumption According to Purpose (COICOP) index is used.\nCode: Import methods and initialise\nfrom sic_soc_llm import setup_logging, get_config\nfrom sic_soc_llm.llm import ClassificationLLM\nfrom sic_soc_llm.embedding import EmbeddingHandler\n\nlogger = setup_logging('coicop_notebook')\nconfig = get_config()"
+  },
+  {
+    "objectID": "tutorials/4_custom_coicop_classifier.html#load-coicop-or-other-custom-index",
+    "href": "tutorials/4_custom_coicop_classifier.html#load-coicop-or-other-custom-index",
+    "title": "4. Custom (COICOP) classifier",
+    "section": "Load COICOP or other custom index",
+    "text": "Load COICOP or other custom index\nThe expected format of the custom index is a text file with each line containing one index entry in the format class_code : class_descriptive. The following code snippet demonstrates how to load and embed the COICOP index. This embedding is saved in a vector store that is used in the retrieval step of RAG based classification in ClassificationLLM. Note that the coicop_demo_llm should be replaced with the LLM of your choice.\n\n\nCode: Load COICOP index\nindex_filepath = config[\"lookups\"][\"coicop_condensed\"]\nwith open(index_filepath) as file_object:\n    for _ in range(5):\n        print(next(file_object))\n\nembed = EmbeddingHandler(db_dir=None)\nwith open(index_filepath) as file_object:\n    embed.embed_index(file_object=file_object)\n\ncoicop_llm = ClassificationLLM(embedding_handler=embed, llm = coicop_demo_llm)\n\n\nCP01111: Rice\n\nCP01112: Flours and other cereals\n\nCP01113: Bread\n\nCP01114: Other bakery products\n\nCP01115: Pizza and quiche"
+  },
+  {
+    "objectID": "tutorials/4_custom_coicop_classifier.html#example-classification-using-coicop-index",
+    "href": "tutorials/4_custom_coicop_classifier.html#example-classification-using-coicop-index",
+    "title": "4. Custom (COICOP) classifier",
+    "section": "Example classification using COICOP index",
+    "text": "Example classification using COICOP index\nThe following code block demonstrates how to classify a few examples using the COICOP index. Note that the respondent data is passed as a dictionary. For different use cases, any custom survey fields can be used as keys in the dictionary. ClassificationLLM uses the values that are present in the dictionary to retrieve the relevant information from the index and includes all the provided fields in the generative query step.\n\n\nCode: Example lookup\nfor item in [\"organic whole milk\", \"skinny jeans\", \"tooth filling\"]:\n    # Get response from LLM\n    response, short_list = coicop_llm.rag_general_code(respondent_data={\"item\": item})\n\n    # Print the output\n    print(\"Input:\")\n    print(f\" item:  {item}\")\n    print('')\n    print(\"Response:\")\n    for x,y  in response.__dict__.items():\n        print (f' {x}: {y}')\n    print(f\" shortlist used in RAG: {short_list}\")\n    print(\"\")\n    print('===========================================')\n    print(\"\")\n\n\nInput:\n item:  organic whole milk\n\nResponse:\n codable: True\n followup: None\n class_code: CP01141\n class_descriptive: Whole milk\n alt_candidates: [RagCandidate(class_code='CP01146', class_descriptive='Other milk products', likelihood=0.1), RagCandidate(class_code='CP01199', class_descriptive='Other food products n.e.c.', likelihood=0.05)]\n reasoning: The respondent's data mentions 'organic whole milk' which directly matches with the 'Whole milk' category in the classification index. Although the milk is organic, there is no separate category for organic milk in the provided subset of classification index. Therefore, the most suitable classification code is 'CP01141' for 'Whole milk'. Other possible but less likely categories could be 'Other milk products' or 'Other food products n.e.c.'.\n shortlist used in RAG: [{'distance': 0.34670400619506836, 'title': ' Whole milk\\n', 'code': 'CP01141', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.5039430856704712, 'title': ' Other milk products\\n', 'code': 'CP01146', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.732480525970459, 'title': ' Preserved milk\\n', 'code': 'CP01143', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 0.7517217397689819, 'title': ' Low fat milk\\n', 'code': 'CP01142', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.0075041055679321, 'title': ' Yoghurt\\n', 'code': 'CP01144', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.0319886207580566, 'title': ' Other food products n.e.c.\\n', 'code': 'CP01199', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1342484951019287, 'title': ' Artificial sugar substitutes\\n', 'code': 'CP01186', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1362781524658203, 'title': ' Other cereal products\\n', 'code': 'CP01118', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1640750169754028, 'title': ' Other bakery products\\n', 'code': 'CP01114', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1741816997528076, 'title': ' Cheese and curd\\n', 'code': 'CP01145', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.174346923828125, 'title': ' Confectionery products\\n', 'code': 'CP01184', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.1958930492401123, 'title': ' Olive oil\\n', 'code': 'CP01153', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2051899433135986, 'title': ' Pharmaceutical products\\n', 'code': 'CP06110', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.2462573051452637, 'title': ' Sugar\\n', 'code': 'CP01181', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.24760901927948, 'title': ' Other edible oils\\n', 'code': 'CP01154', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2480995655059814, 'title': ' Soft drinks\\n', 'code': 'CP01222', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2607505321502686, 'title': ' Rice\\n', 'code': 'CP01111', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2730278968811035, 'title': ' Other edible animal fats\\n', 'code': 'CP01155', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2755171060562134, 'title': ' Breakfast cereals\\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2833454608917236, 'title': ' Dried fruit and nuts\\n', 'code': 'CP01163', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}]\n\n===========================================\n\nInput:\n item:  skinny jeans\n\nResponse:\n codable: False\n followup: Is the item intended for men or women?\n class_code: None\n class_descriptive: None\n alt_candidates: [RagCandidate(class_code='CP03121', class_descriptive='Garments for men', likelihood=0.5), RagCandidate(class_code='CP03122', class_descriptive='Garments for women', likelihood=0.5)]\n reasoning: The item 'skinny jeans' can be classified as either 'Garments for men' or 'Garments for women'. Without information on the intended gender for the item, a definitive classification cannot be made.\n shortlist used in RAG: [{'distance': 1.0392100811004639, 'title': ' Garments for men\\n', 'code': 'CP03121', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.0935455560684204, 'title': ' Garments for women\\n', 'code': 'CP03122', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.1048061847686768, 'title': ' Clothing materials\\n', 'code': 'CP03110', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.1491382122039795, 'title': ' Clothing accessories\\n', 'code': 'CP03132', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.183807373046875, 'title': ' Clothes washing machines\\n', 'code': 'CP05312', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.2130918502807617, 'title': ' Other articles of clothing\\n', 'code': 'CP03131', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.2768938541412354, 'title': ' Jams\\n', 'code': 'CP01182', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2890671491622925, 'title': ' Repair and hire of clothing\\n', 'code': 'CP03142', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.2973721027374268, 'title': ' Dried\\n', 'code': 'CP01135', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2973721027374268, 'title': ' Dried\\n', 'code': 'CP01127', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3091436624526978, 'title': ' Crisps\\n', 'code': 'CP01175', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.327451467514038, 'title': ' Bed linen\\n', 'code': 'CP05202', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3461003303527832, 'title': ' Bicycles\\n', 'code': 'CP07130', 'four_digit_code': 'CP07', 'two_digit_code': 'CP'}, {'distance': 1.3484004735946655, 'title': ' Pork\\n', 'code': 'CP01122', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3745286464691162, 'title': ' Footwear for men\\n', 'code': 'CP03211', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.3757548332214355, 'title': ' Irons\\n', 'code': 'CP05323', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3820579051971436, 'title': ' Breakfast cereals\\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3839714527130127, 'title': ' Cleaning of clothing\\n', 'code': 'CP03141', 'four_digit_code': 'CP03', 'two_digit_code': 'CP'}, {'distance': 1.3974006175994873, 'title': ' Heaters\\n', 'code': 'CP05314', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.3990002870559692, 'title': ' Camper vans\\n', 'code': 'CP09211', 'four_digit_code': 'CP09', 'two_digit_code': 'CP'}]\n\n===========================================\n\nInput:\n item:  tooth filling\n\nResponse:\n codable: True\n followup: None\n class_code: CP06220\n class_descriptive: Dental services\n alt_candidates: []\n reasoning: The respondent's data mentions 'tooth filling' which is a service provided by dentists. Therefore, the classification code 'CP06220' for 'Dental services' is the most appropriate.\n shortlist used in RAG: [{'distance': 0.9580115079879761, 'title': ' Dental services\\n', 'code': 'CP06220', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.2639143466949463, 'title': ' Chocolate\\n', 'code': 'CP01183', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2665995359420776, 'title': ' Sugar\\n', 'code': 'CP01181', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.2992041110992432, 'title': ' Tyres\\n', 'code': 'CP07211', 'four_digit_code': 'CP07', 'two_digit_code': 'CP'}, {'distance': 1.3504626750946045, 'title': ' Bread\\n', 'code': 'CP01113', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.3816959857940674, 'title': ' Crisps\\n', 'code': 'CP01175', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4047653675079346, 'title': ' Cutlery\\n', 'code': 'CP05402', 'four_digit_code': 'CP05', 'two_digit_code': 'CP'}, {'distance': 1.413558006286621, 'title': ' Cigarettes\\n', 'code': 'CP02201', 'four_digit_code': 'CP02', 'two_digit_code': 'CP'}, {'distance': 1.4301748275756836, 'title': ' Salt\\n', 'code': 'CP01192', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.443652868270874, 'title': ' Hearing aids\\n', 'code': 'CP06132', 'four_digit_code': 'CP06', 'two_digit_code': 'CP'}, {'distance': 1.4493237733840942, 'title': ' Jewellery\\n', 'code': 'CP12311', 'four_digit_code': 'CP12', 'two_digit_code': 'CP'}, {'distance': 1.4624769687652588, 'title': ' Breakfast cereals\\n', 'code': 'CP01117', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4685726165771484, 'title': ' Butter\\n', 'code': 'CP01151', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4742844104766846, 'title': ' Baby food\\n', 'code': 'CP01193', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4815491437911987, 'title': ' Coffee\\n', 'code': 'CP01211', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4819934368133545, 'title': ' Eggs\\n', 'code': 'CP01147', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.4847772121429443, 'title': ' Lubricants\\n', 'code': 'CP07224', 'four_digit_code': 'CP07', 'two_digit_code': 'CP'}, {'distance': 1.495471477508545, 'title': ' Whole milk\\n', 'code': 'CP01141', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.5035916566848755, 'title': ' Edible offal\\n', 'code': 'CP01126', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}, {'distance': 1.509711503982544, 'title': ' Other cereal products\\n', 'code': 'CP01118', 'four_digit_code': 'CP01', 'two_digit_code': 'CP'}]\n\n==========================================="
+  },
+  {
+    "objectID": "reference/RagCandidate.html",
+    "href": "reference/RagCandidate.html",
+    "title": "RagCandidate",
+    "section": "",
+    "text": "data_models.response_model.RagCandidate()\nRepresents a candidate classification code with associated information.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nclass_code\nstr\nPlausible classification code based on the respondent’s data.\n\n\nclass_descriptive\nstr\nDescriptive label of the classification category associated with class_code.\n\n\nlikelihood\nfloat\nLikelihood of this class_code with a value between 0 and 1."
+  },
+  {
+    "objectID": "reference/RagCandidate.html#attributes",
+    "href": "reference/RagCandidate.html#attributes",
+    "title": "RagCandidate",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nclass_code\nstr\nPlausible classification code based on the respondent’s data.\n\n\nclass_descriptive\nstr\nDescriptive label of the classification category associated with class_code.\n\n\nlikelihood\nfloat\nLikelihood of this class_code with a value between 0 and 1."
+  },
+  {
+    "objectID": "reference/SIC.html",
+    "href": "reference/SIC.html",
+    "title": "SIC",
+    "section": "",
+    "text": "data_models.sic_hierarchy.SIC(self, nodes, code_lookup)\nMain class for SIC lookups.\n\n\nsic = load_hierarchy(sic_df, sic_index_df)\nsic[“01.1”]\nsic[“011”]\nsic[“A011xx”]\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nall_leaf_activities\nAll activities for 5-digit SIC.\n\n\nall_leaf_descriptions\nAll descriptions for 5-digit SIC.\n\n\nall_leaf_text\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_activities()\nAll activities for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_descriptions()\nAll descriptions for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_text()\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\nActivities from the SIC index\nDescription from the SIC structure\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\npd.DataFrame\npd.DataFrame Two columns code, text"
+  },
+  {
+    "objectID": "reference/SIC.html#usage",
+    "href": "reference/SIC.html#usage",
+    "title": "SIC",
+    "section": "",
+    "text": "sic = load_hierarchy(sic_df, sic_index_df)\nsic[“01.1”]\nsic[“011”]\nsic[“A011xx”]"
+  },
+  {
+    "objectID": "reference/SIC.html#methods",
+    "href": "reference/SIC.html#methods",
+    "title": "SIC",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nall_leaf_activities\nAll activities for 5-digit SIC.\n\n\nall_leaf_descriptions\nAll descriptions for 5-digit SIC.\n\n\nall_leaf_text\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_activities()\nAll activities for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_descriptions()\nAll descriptions for 5-digit SIC.\n\n\nDoes not include 4-digit SIC codes where those codes have a 5-digit expansion.\ni.e. Only returns for leaf nodes.\n\n\n\n\ndata_models.sic_hierarchy.SIC.all_leaf_text()\nReturns all short text descriptions of 5-digit level SIC.\n\n\n\nActivities from the SIC index\nDescription from the SIC structure\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\npd.DataFrame\npd.DataFrame Two columns code, text"
+  },
+  {
+    "objectID": "reference/SicCode.html",
+    "href": "reference/SicCode.html",
+    "title": "SicCode",
+    "section": "",
+    "text": "data_models.sic_hierarchy.SicCode(self, alpha_code)\nStandard Industrial Classification code.\nThe main representation for SIC in this class is the alpha_code, which we define as:\n* The section character e.g. 'A'\n* Followed by the numeric SIC code e.g. \"0111\"\n* Padded with 'x' to six characters\nFor example: “A0111x”\nThe class supports initialisation with section, code and level via the factory method from_section_code_level.\n\n\nSicCode.from_section_code_level(“A”, “0111”, “class”)\n\n\n\nThis class is mainly for internal use, beyond some basic checks of formatting and consistency it does not validate that a code is defined in UK SIC 2007.\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nfrom_section_code_level\nFactory method for SicCode.\n\n\n\n\n\ndata_models.sic_hierarchy.SicCode.from_section_code_level(section, code, level)\nFactory method for SicCode.\n\n\nUsed to produce the definitive list of SIC codes, only call with data that defines SIC."
+  },
+  {
+    "objectID": "reference/SicCode.html#for-example",
+    "href": "reference/SicCode.html#for-example",
+    "title": "SicCode",
+    "section": "",
+    "text": "SicCode.from_section_code_level(“A”, “0111”, “class”)"
+  },
+  {
+    "objectID": "reference/SicCode.html#note",
+    "href": "reference/SicCode.html#note",
+    "title": "SicCode",
+    "section": "",
+    "text": "This class is mainly for internal use, beyond some basic checks of formatting and consistency it does not validate that a code is defined in UK SIC 2007."
+  },
+  {
+    "objectID": "reference/SicCode.html#methods",
+    "href": "reference/SicCode.html#methods",
+    "title": "SicCode",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nfrom_section_code_level\nFactory method for SicCode.\n\n\n\n\n\ndata_models.sic_hierarchy.SicCode.from_section_code_level(section, code, level)\nFactory method for SicCode.\n\n\nUsed to produce the definitive list of SIC codes, only call with data that defines SIC."
+  },
+  {
+    "objectID": "reference/SicResponse.html",
+    "href": "reference/SicResponse.html",
+    "title": "SicResponse",
+    "section": "",
+    "text": "data_models.response_model.SicResponse()\nRepresents a response model for SIC code assignment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SIC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable SIC assignment. Empty if codable=True.\n\n\nsic_code\nOptional[str]\nFull SIC code (to the required number of digits) assigned based on the provided company activity description. Empty if codable=False.\n\n\nsic_descriptive\nOptional[str]\nDescriptive label of the SIC category associated with sic_code if provided. Empty if codable=False.\n\n\nsic_candidates\nList[SicCandidate]\nShort list of less than ten possible or alternative sic codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsic_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SIC code assigned. This field should be non empty if the larger (two-digit) group of SIC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SIC candidates share the same first two digits).\n\n\nreasoning\nstr\nSpecifies the information used to assign the SIC code or any additional information required to assign a SIC code."
+  },
+  {
+    "objectID": "reference/SicResponse.html#attributes",
+    "href": "reference/SicResponse.html#attributes",
+    "title": "SicResponse",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SIC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask user in order to collect additional information to enable reliable SIC assignment. Empty if codable=True.\n\n\nsic_code\nOptional[str]\nFull SIC code (to the required number of digits) assigned based on the provided company activity description. Empty if codable=False.\n\n\nsic_descriptive\nOptional[str]\nDescriptive label of the SIC category associated with sic_code if provided. Empty if codable=False.\n\n\nsic_candidates\nList[SicCandidate]\nShort list of less than ten possible or alternative sic codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsic_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SIC code assigned. This field should be non empty if the larger (two-digit) group of SIC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SIC candidates share the same first two digits).\n\n\nreasoning\nstr\nSpecifies the information used to assign the SIC code or any additional information required to assign a SIC code."
+  },
+  {
+    "objectID": "reference/SocResponse.html",
+    "href": "reference/SocResponse.html",
+    "title": "SocResponse",
+    "section": "",
+    "text": "data_models.response_model.SocResponse()\nRepresents a response model for SOC code assignment.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SOC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask the user in order to collect additional information to enable reliable SOC assignment. Empty if codable=True.\n\n\nsoc_code\nOptional[str]\nFull four-digit SOC code assigned based on provided job title, description, etc. Empty if codable=False.\n\n\nsoc_descriptive\nOptional[str]\nDescriptive label of the SOC category associated with soc_code if provided. Empty if codable=False.\n\n\nsoc_candidates\nList[SocCandidate]\nList of possible or alternative SOC codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsoc_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SOC code assigned. This field should be non-empty if the larger (two-digit) group of SOC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SOC candidates share the same first two digits).\n\n\nreasoning\nstr\nStep by step reasoning behind classification selected. Specifies the information used to assign the SOC code or any additional information required to assign a SOC code."
+  },
+  {
+    "objectID": "reference/SocResponse.html#attributes",
+    "href": "reference/SocResponse.html#attributes",
+    "title": "SocResponse",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\ncodable\nbool\nTrue if enough information is provided to decide SOC code, False otherwise.\n\n\nfollowup\nOptional[str]\nQuestion to ask the user in order to collect additional information to enable reliable SOC assignment. Empty if codable=True.\n\n\nsoc_code\nOptional[str]\nFull four-digit SOC code assigned based on provided job title, description, etc. Empty if codable=False.\n\n\nsoc_descriptive\nOptional[str]\nDescriptive label of the SOC category associated with soc_code if provided. Empty if codable=False.\n\n\nsoc_candidates\nList[SocCandidate]\nList of possible or alternative SOC codes that may be applicable with their descriptive label and estimated likelihood.\n\n\nsoc_code_2digits\nOptional[str]\nFirst two digits of the hierarchical SOC code assigned. This field should be non-empty if the larger (two-digit) group of SOC codes can be determined even in cases where additional information is needed to code to four digits (for example when all SOC candidates share the same first two digits).\n\n\nreasoning\nstr\nStep by step reasoning behind classification selected. Specifies the information used to assign the SOC code or any additional information required to assign a SOC code."
+  },
+  {
+    "objectID": "reference/embedding.EmbeddingHandler.html",
+    "href": "reference/embedding.EmbeddingHandler.html",
+    "title": "embedding.EmbeddingHandler",
+    "section": "",
+    "text": "embedding.EmbeddingHandler(self, embedding_model_name=config['llm']['embedding_model_name'], db_dir=config['llm']['db_dir'], k_matches=20)\nHandles embedding operations for the Chroma vector store.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nembedding_model_name\nstr\nThe name of the embedding model to use. Defaults to the value specified in the configuration file.\nconfig['llm']['embedding_model_name']\n\n\ndb_dir\nstr\nThe directory where the vector store database is located. Defaults to the value specified in the configuration file. If None then the embedding db will be non-persistent.\nconfig['llm']['db_dir']\n\n\nk_matches\nint\nThe number of nearest matches to retrieve. Defaults to 20.\n20\n\n\n\n\n\n\n\n\n\nName\nDescription\n\n\n\n\nembed_index\nEmbeds the index entries into the vector store.\n\n\nsearch_index\nReturns k document chunks with the highest relevance to the query.\n\n\nsearch_index_multi\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\nembedding.EmbeddingHandler.embed_index(from_empty=True, sic=None, file_object=None)\nEmbeds the index entries into the vector store.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nfrom_empty\nbool\nWhether to drop the current vector store content and start fresh.\nTrue\n\n\nsic\nSIC\nThe SIC hierarchy object. If None, the hierarchy is loaded from files specified in the config.\nNone\n\n\nfile_object\nStringIO object\nThe index file as StringIO object. If provided, the file will be read by line and embedded. Each line has expected format of code: description\nNone\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index(query, return_dicts=True)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nstr\nQuestion for which most relevant index entries will be returned.\nrequired\n\n\nreturn_dicts\nbool\nIf True, data returned as list of dictionaries, otherwise as document tuples. Defaults to True.\nTrue\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance.\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index_multi(query)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nlist[str]\nList of query fields (in priority order) for which most relevant index entries will be returned. e.g [industry_descr, job_title, job_descr]\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance."
+  },
+  {
+    "objectID": "reference/embedding.EmbeddingHandler.html#parameters",
+    "href": "reference/embedding.EmbeddingHandler.html#parameters",
+    "title": "embedding.EmbeddingHandler",
+    "section": "",
+    "text": "Name\nType\nDescription\nDefault\n\n\n\n\nembedding_model_name\nstr\nThe name of the embedding model to use. Defaults to the value specified in the configuration file.\nconfig['llm']['embedding_model_name']\n\n\ndb_dir\nstr\nThe directory where the vector store database is located. Defaults to the value specified in the configuration file. If None then the embedding db will be non-persistent.\nconfig['llm']['db_dir']\n\n\nk_matches\nint\nThe number of nearest matches to retrieve. Defaults to 20.\n20"
+  },
+  {
+    "objectID": "reference/embedding.EmbeddingHandler.html#methods",
+    "href": "reference/embedding.EmbeddingHandler.html#methods",
+    "title": "embedding.EmbeddingHandler",
+    "section": "",
+    "text": "Name\nDescription\n\n\n\n\nembed_index\nEmbeds the index entries into the vector store.\n\n\nsearch_index\nReturns k document chunks with the highest relevance to the query.\n\n\nsearch_index_multi\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\nembedding.EmbeddingHandler.embed_index(from_empty=True, sic=None, file_object=None)\nEmbeds the index entries into the vector store.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nfrom_empty\nbool\nWhether to drop the current vector store content and start fresh.\nTrue\n\n\nsic\nSIC\nThe SIC hierarchy object. If None, the hierarchy is loaded from files specified in the config.\nNone\n\n\nfile_object\nStringIO object\nThe index file as StringIO object. If provided, the file will be read by line and embedded. Each line has expected format of code: description\nNone\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index(query, return_dicts=True)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nstr\nQuestion for which most relevant index entries will be returned.\nrequired\n\n\nreturn_dicts\nbool\nIf True, data returned as list of dictionaries, otherwise as document tuples. Defaults to True.\nTrue\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance.\n\n\n\n\n\n\n\nembedding.EmbeddingHandler.search_index_multi(query)\nReturns k document chunks with the highest relevance to the query.\n\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\nDefault\n\n\n\n\nquery\nlist[str]\nList of query fields (in priority order) for which most relevant index entries will be returned. e.g [industry_descr, job_title, job_descr]\nrequired\n\n\n\n\n\n\n\n\n\nType\nDescription\n\n\n\n\nlist[dict]\nList[dict]: List of top k index entries by relevance."
+  },
+  {
+    "objectID": "reference/index.html",
+    "href": "reference/index.html",
+    "title": "LLM based classification",
+    "section": "",
+    "text": "Large Language Model based classification main handlers.\n\n\n\nembedding.EmbeddingHandler\nHandles embedding operations for the Chroma vector store.\n\n\nllm.ClassificationLLM\nWraps the logic for using an LLM to classify respondent’s data\n\n\nprompt.PromptTemplates\nClass to store prompt templates for SOC and SIC classification tasks.\n\n\n\n\n\n\n\n\nSocCandidate\nRepresents a candidate SOC code based on provided job title and description.\n\n\nSocResponse\nRepresents a response model for SOC code assignment.\n\n\nSicCandidate\nRepresents a candidate SIC code with associated information.\n\n\nSicResponse\nRepresents a response model for SIC code assignment.\n\n\nRagCandidate\nRepresents a candidate classification code with associated information.\n\n\nRagResponse\nRepresents a response model for classification code assignment.\n\n\n\n\n\n\n\nData models to represent Standard Industry Classiffication\n\n\n\nSIC\nMain class for SIC lookups.\n\n\nSicCode\nStandard Industrial Classification code.\n\n\nSicNode\nTree data structure where the nodes hold all data associated with a given SIC.\n\n\n\n\n\n\n\n\nsic_meta_model.ClassificationMeta\nRepresents a classification meta model.\n\n\nsicDB.SicMeta\nSIC Meta data model class for SIC codes and their descriptions\n\n\n\n\n\n\n\nConfig and Log utils\n\n\n\nsetup_logging\nSet up console and file logging.\n\n\nget_config\nFetch the configuration.\n\n\ncheck_file_exists\nCheck if the file exists."
+  },
+  {
+    "objectID": "reference/index.html#classification-module",
+    "href": "reference/index.html#classification-module",
+    "title": "LLM based classification",
+    "section": "",
+    "text": "Large Language Model based classification main handlers.\n\n\n\nembedding.EmbeddingHandler\nHandles embedding operations for the Chroma vector store.\n\n\nllm.ClassificationLLM\nWraps the logic for using an LLM to classify respondent’s data\n\n\nprompt.PromptTemplates\nClass to store prompt templates for SOC and SIC classification tasks.\n\n\n\n\n\n\n\n\nSocCandidate\nRepresents a candidate SOC code based on provided job title and description.\n\n\nSocResponse\nRepresents a response model for SOC code assignment.\n\n\nSicCandidate\nRepresents a candidate SIC code with associated information.\n\n\nSicResponse\nRepresents a response model for SIC code assignment.\n\n\nRagCandidate\nRepresents a candidate classification code with associated information.\n\n\nRagResponse\nRepresents a response model for classification code assignment."
+  },
+  {
+    "objectID": "reference/index.html#sic-index-abstraction",
+    "href": "reference/index.html#sic-index-abstraction",
+    "title": "LLM based classification",
+    "section": "",
+    "text": "Data models to represent Standard Industry Classiffication\n\n\n\nSIC\nMain class for SIC lookups.\n\n\nSicCode\nStandard Industrial Classification code.\n\n\nSicNode\nTree data structure where the nodes hold all data associated with a given SIC.\n\n\n\n\n\n\n\n\nsic_meta_model.ClassificationMeta\nRepresents a classification meta model.\n\n\nsicDB.SicMeta\nSIC Meta data model class for SIC codes and their descriptions"
+  },
+  {
+    "objectID": "reference/index.html#helpers",
+    "href": "reference/index.html#helpers",
+    "title": "LLM based classification",
+    "section": "",
+    "text": "Config and Log utils\n\n\n\nsetup_logging\nSet up console and file logging.\n\n\nget_config\nFetch the configuration.\n\n\ncheck_file_exists\nCheck if the file exists."
+  },
+  {
+    "objectID": "reference/prompt.PromptTemplates.html",
+    "href": "reference/prompt.PromptTemplates.html",
+    "title": "prompt.PromptTemplates",
+    "section": "",
+    "text": "prompt.PromptTemplates(self)\nClass to store prompt templates for SOC and SIC classification tasks.\nEach prompt template includes the necessary variables and formatting instructions to generate the prompt. The module also includes the necessary imports and configurations to generate the prompts.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nSOC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SOC codes based on respondent’s data.\n\n\nSIC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data.\n\n\nSIC_PROMPT_RAG\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data, with a relevant subset of SIC codes provided.\n\n\nGENERAL_PROMPT_RAG\nPromptTemplate\nPrompt template for determining custom classification codes based on respondent data, with a relevant subset of codes provided."
+  },
+  {
+    "objectID": "reference/prompt.PromptTemplates.html#attributes",
+    "href": "reference/prompt.PromptTemplates.html#attributes",
+    "title": "prompt.PromptTemplates",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nSOC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SOC codes based on respondent’s data.\n\n\nSIC_PROMPT_PYDANTIC\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data.\n\n\nSIC_PROMPT_RAG\nPromptTemplate\nPrompt template for determining SIC codes based on respondent’s data, with a relevant subset of SIC codes provided.\n\n\nGENERAL_PROMPT_RAG\nPromptTemplate\nPrompt template for determining custom classification codes based on respondent data, with a relevant subset of codes provided."
+  },
+  {
+    "objectID": "reference/sicDB.SicMeta.html",
+    "href": "reference/sicDB.SicMeta.html",
+    "title": "sicDB.SicMeta",
+    "section": "",
+    "text": "data_models.sicDB.SicMeta(self)\nSIC Meta data model class for SIC codes and their descriptions build based on java dictionary from onsdigital repo.\n\n\n\n\n\n\n\n\n\n\nName\nType\nDescription\n\n\n\n\nsic_meta\nList[ClassificationMeta]\nList of ClassificationMeta objects"
+  },
+  {
+    "objectID": "reference/sicDB.SicMeta.html#attributes",
+    "href": "reference/sicDB.SicMeta.html#attributes",
+    "title": "sicDB.SicMeta",
+    "section": "",
+    "text": "Name\nType\nDescription\n\n\n\n\nsic_meta\nList[ClassificationMeta]\nList of ClassificationMeta objects"
   }
 ]
