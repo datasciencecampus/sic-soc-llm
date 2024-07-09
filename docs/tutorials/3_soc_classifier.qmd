@@ -11,8 +11,6 @@ Demonstration notebook for the `ClassificationLLM` with Standard Occupational Cl
 
 ```{python}
 #| code-summary: "Code: Import methods and initialise"
-from langchain.llms.fake import FakeListLLM
-
 from sic_soc_llm import setup_logging
 from sic_soc_llm.llm import ClassificationLLM
 
@@ -22,6 +20,7 @@ logger = setup_logging("soc_classifier")
 ```{python}
 #| echo: false
 #| code-summary: "Code: Create a fake Large Language Model (LLM) for demonstration purposes"
+from langchain.llms.fake import FakeListLLM
 
 soc_demo_llm = FakeListLLM(responses=[
 '''

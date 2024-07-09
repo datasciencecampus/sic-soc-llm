@@ -54,6 +54,7 @@ app = [
 test = [
     "pytest==6.2.5",
     "pytest-pythonpath==0.7.4",
+    "coverage==7.5.4",
 ]
 
 docs = ["quartodoc>=0.6.6",

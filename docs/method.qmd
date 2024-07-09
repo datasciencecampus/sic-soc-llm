@@ -5,7 +5,7 @@ format: html
 
 ## Summary
 
-A proof-of-concept large language model (LLM) application was created to assess whether an LLM could improve SIC autocoding performance for survey data. This was applied to sample of anonimized survey data and evaluated by comparing the results to clerical coding and to logistic regression model. The LLM showed marginal improvement over the logistic regression in the level of agreement with clerical coding at the 5-digit SIC level. It is likely that refinement of the method would improve performance further. Note that the evaluation scripts are out of scope for this repository. The methodology of the main SIC autocoding module is described bellow. For more information see Data science campus [blog](https://datasciencecampus.ons.gov.uk/category/projects/).
+A proof-of-concept large language model (LLM) application was created to assess whether an LLM could improve SIC autocoding performance for survey data. This was applied to sample of anonimized survey data and evaluated by comparing the results to clerical coding and to logistic regression model. The LLM showed marginal improvement over the logistic regression in the level of agreement with clerical coding at the 5-digit SIC level. It is likely that refinement of the method would improve performance further. Note that the evaluation scripts are out of scope for this repository. The methodology of the main SIC autocoding module is described bellow. For more information see Data science campus [blog](https://datasciencecampus.ons.gov.uk/classifai-exploring-the-use-of-large-language-models-llms-to-assign-free-text-to-commonly-used-classifications/).
 
 ## RAG based classification
 
